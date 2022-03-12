@@ -19,10 +19,10 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #8bbfca;">
-        <a class="navbar-brand" href="{{url_for('accueil2')}}"> <img class="d-inline-block" src="{{url_for('static', filename='images/logo.svg')}}" width="60" height="60" alt=""/></a>
+        <a class="navbar-brand" href="{{url_for('accueil')}}"> <img class="d-inline-block" src="{{url_for('static', filename='images/pavot.png')}}" width="60" height="60" class="d-inline-block align-text-top"/>BioDiVienne</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item active"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
-            <a class="nav-link" href="{{url_for('accueil2')}}">Accueil</a>
+            <a class="nav-link" href="{{url_for('accueil')}}">Accueil</a>
           </li>
           <li class="nav-item dropdown nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -48,8 +48,8 @@
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{url_for('recherche')}}" method="GET">
-          <input class="form-control mr-sm-2" name="keyword" type="search" placeholder="Recherche..." aria-label="Search"/>
-          <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Rechercher</button>
+            <a class="nav-link" src="{{url_for('recherche')}}" href="{{url_for('recherche')}}">Rechercher</a>
+
         </form>
         <ul class="navbar-nav mr-auto">
              <li class="nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->

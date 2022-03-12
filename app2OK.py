@@ -91,7 +91,7 @@ def recherche():
             Photo.titre.like("%{}%".format(motclef))
         ).all()
         titre = "Résultat pour la recherche `" + motclef + "`"
-    return render_template("form.html", resultats=resultats, titre=titre)
+    return render_template("formOK.html", resultats=resultats, titre=titre)
 
 
 @app.route("/charger")

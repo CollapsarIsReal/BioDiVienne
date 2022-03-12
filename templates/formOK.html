@@ -1,0 +1,21 @@
+{% extends "conteneur3.html" %}
+
+{% block titre %}| {{titre}}{%endblock%}
+
+{% block corps %}
+
+   {% include "partials/form.html" %}
+
+    <h1>{{titre}}</h1>
+    {% if resultats %}
+    <p>Il y a {{resultats|length}} photos qui répondent à votre requête :</p>
+        <ul>
+            {% for photo in resultats %}
+                        <li><a href="{{url_for('image', id=photo.id)}}">{{photo.titre}}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <p>Désolée aucune photo trouvée.</p>
+    {% endif %}
+
+{% endblock %}

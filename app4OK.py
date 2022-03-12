@@ -66,7 +66,7 @@ def image(id):
 @app.route("/")
 def accueil(exemple=None):
     images = Photo.query.all()
-    return render_template("accueil2OK.html", bananes=images)
+    return render_template("accueil3.html", bananes=images)
 
 
 @app.route("/accueil")
@@ -92,7 +92,7 @@ def recherche():
             Photo.titre.like("%{}%".format(motclef))
         ).all()
         titre = "Résultat pour la recherche `" + motclef + "`"
-    return render_template("form.html", resultats=resultats, titre=titre)
+    return render_template("formOK.html", resultats=resultats, titre=titre)
 
 
 @app.route("/charger")
