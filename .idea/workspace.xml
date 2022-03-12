@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5af2ecb5-3b0b-44de-9475-79bc89a3b0b9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/espece_faune.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app4.py" beforeDir="false" afterPath="$PROJECT_DIR$/app4OK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/bootstrap.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/accueil3.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/accueil3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/conteneur2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/conteneur2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/photo_animale.html" beforeDir="false" />
-    </list>
+    <list default="true" id="5af2ecb5-3b0b-44de-9475-79bc89a3b0b9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
