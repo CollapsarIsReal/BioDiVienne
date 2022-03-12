@@ -29,19 +29,17 @@
               Espèces
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item nav-link">Animale</a>
-              <a class="dropdown-item nav-link">Faune</a>
-              <a class="dropdown-item nav-link">Flore</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item nav-link" href="#">Compte</a>
+              <a class="dropdown-item nav-link" href="{{url_for('espece_faune')}}">Faune</a>
+              <a class="dropdown-item nav-link" href="{{url_for('espece_flore')}}">Flore</a>
             </div>
           </li>
             <li class="nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
-            <a class="nav-link" href="#">Outils</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Outils
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item nav-link">Carte</a>
               <a class="dropdown-item nav-link">Calendrier</a>
-                <div class="dropdown-divider"></div>
             </div>
           </li>
             </li>
@@ -54,15 +52,15 @@
           <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Rechercher</button>
         </form>
         <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link">Inscription</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link">Connexion</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link">Déconnexion</a>
-              </li>
+             <li class="nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Compte
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item nav-link">Se connecter</a>
+              <a class="dropdown-item nav-link">Inscription</a>
+            </div>
+          </li>
         </ul>
     </nav>
     {% block afternav %}{%endblock%}
