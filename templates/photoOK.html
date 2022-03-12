@@ -1,0 +1,23 @@
+{% extends "conteneur.html" %}
+
+{% block titre %}
+    {%if photo %}| Photo : {{photo.titre}} {% endif %}
+{% endblock %}
+
+{% block corps %}
+    {% if photo %}
+        <h1>{{photo.titre}}</h1>
+            <ul>
+                <li>{{photo.description}}</li>
+                <li>{{photo.compte_createur_id}}</li>
+                <li>{{photo.compte.pseudo}}</li>
+                <li>{{photo.emplacement}}</li>
+                <li><img src=/display/{{photo.emplacement}}></li>
+                <li><img src="{{url_for('display_image', filename='jambon.jpg')}}"></li>
+            </ul>
+
+    {% else %}
+        <p>La base de données est en cours de constitution</p>
+    {% endif %}
+    <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+{% endblock %}

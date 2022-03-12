@@ -1,0 +1,16 @@
+{% extends "conteneur2.html" %}
+    {% include "partials/form.html" %}
+{% block corps %}
+<h1>Explorez la biodiversité qui vous entoure</h1>
+    {% if bananes %}
+        Il y a {{bananes|length}} photos enregistrées :
+        <ul>
+            {% for element in bananes %}
+                <li><a href="{{url_for('image', id=element.id)}}">{{element.titre}}</a></li>
+
+            {% endfor %}
+        </ul>
+    {% else %}
+        La base de données est en cours de constitution
+    {% endif %}
+{% endblock %}

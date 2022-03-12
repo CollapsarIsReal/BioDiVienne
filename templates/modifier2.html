@@ -1,0 +1,19 @@
+{% block corps %}
+
+    <h1>Page de modifications</h1>
+    {{photo.titre}}
+    <p>Nom vernaculaire: </p>
+    <p>Nom latin: </p>
+    <p>Titre :{% include "partials/partialModif2.html" %}</p>
+    {% if resultats %}
+    <p>Il y a {{resultats|length}} photos qui répondent à votre requête :</p>
+        <ul>
+            {% for photo in resultats %}
+                        <li><a href="{{url_for('image', id=photo.id)}}">{{photo.titre}}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+    <p>Désolée aucune photo trouvée.</p>
+    {% endif %}
+
+{% endblock %}

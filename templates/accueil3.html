@@ -1,0 +1,21 @@
+{% extends "conteneur2.html" %}
+
+{% block titre %}
+    {{name}}
+{% endblock %}
+{% block corps %}
+	<p>{% if bananes %}
+        Il y a {{ bananes|length }} enregistrés :
+        <ul>
+            {% for photo in bananes %}
+            <li><a href="{{url_for('image', id=photo.id)}}">{{photo.titre}}</a></li>
+
+
+
+        </ul>
+        <li><img src=/display/{{photo.lien_interne}} width="50%"></li>
+        {% endfor %}
+        {% endif %}
+    </p>
+
+{% endblock %}

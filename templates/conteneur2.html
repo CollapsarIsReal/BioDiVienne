@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <head>
+    <meta charset="UTF-8">
+    <title>BiodiVienne {% block titre %}{% endblock %}</title>
+    {% include "partials/css.html" %}
+    {% include "partials/metadata.html" %}
+    <style type="text/css">
+            .hero  {
+                background-position: center center;
+                padding:10vh;
+                background-image: url({{url_for('static', filename='images/font.jpg')}});
+            }
+            .container {
+                background-image: none;
+            }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #8bbfca;">
+        <a class="navbar-brand" href="{{url_for('accueil2')}}"> <img class="d-inline-block" src="{{url_for('static', filename='images/logo.svg')}}" width="60" height="60" alt=""/></a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item active"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
+            <a class="nav-link" href="{{url_for('accueil2')}}">Accueil</a>
+          </li>
+          <li class="nav-item dropdown nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Espèces
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item nav-link">Animale</a>
+              <a class="dropdown-item nav-link">Faune</a>
+              <a class="dropdown-item nav-link">Flore</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item nav-link" href="#">Compte</a>
+            </div>
+          </li>
+            <li class="nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
+            <a class="nav-link" href="#">Carte</a>
+          </li>
+          <li class="nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
+            <a class="nav-link" href="#">À propos</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="{{url_for('recherche')}}" method="GET">
+          <input class="form-control mr-sm-2" name="keyword" type="search" placeholder="Recherche..." aria-label="Search"/>
+          <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Rechercher</button>
+        </form>
+        <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link">Inscription</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">Connexion</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">Déconnexion</a>
+              </li>
+        </ul>
+    </nav>
+    {% block afternav %}{%endblock%}
+      <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+          <div class="row">
+              <div class="col">
+                {% for category, message in messages %}
+                  <div class="alert alert-{{category}}" role="alert">{{ message }}</div>
+                {% endfor %}
+              </div>
+          </div>
+      </div>
+          {% endif %}
+        {% endwith %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            {% block corps %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
