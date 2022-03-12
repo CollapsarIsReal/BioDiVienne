@@ -2992,7 +2992,7 @@ tbody.collapse.show {
   margin-bottom: 0;
   font-size: 0.875rem;
   color: #868e96;
-  white-space: nowrap;
+  white-space: nbtn btn-outline-successowrap;
 }
 
 .btn-group,
