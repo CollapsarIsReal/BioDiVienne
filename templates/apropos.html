@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "conteneur3.html" %}
+{% block corps %}
+<html lang="fr">
+<br/>
+<br/>
+<h2>A la découverte du pourtour Confolentais</h2>
+    <figure>
+        <img src="{{url_for('static', filename='images/carte.png')}}" class="img-fluid" alt="..."/>
+        <figcaption class="font-italic">Capture d'écran du site <a href="https://www.inaturalist.org/">INaturalist</a></figcaption>
+    </figure>
+<div>
+    <p>Cette application est un travail effectué dans le cadre de la validation du Master TNAH de l'Ecole nationale des chartes.
+    Souhaitant mettre à profit mes compétences, j'ai eu la volonté de créer un outil pour les curieux de la biodiversité
+    de la région, et également à destination des collèges/lycées des environs.
+    Son utilisation est simple : pouvoir recenser les espèces végétales et animales.</p>
+</div>
+{% endblock %}
+</html>

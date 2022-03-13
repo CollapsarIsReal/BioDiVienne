@@ -20,10 +20,23 @@
 		url_for('display_image', filename=filename) }}">
 	</div>
 {% endif %}
+
+<!-- Premier formulaire : charger le fichier -->
 <form method="post" action="/upload" enctype="multipart/form-data">
-    <dl>
+	<table>
+		<tr>
+			<td>
+		<input type="file" name="image" autocomplete="off" required>
+		<input type="submit" value="Charger">
+			</td>
+		</tr>
+	</table>
+</form>
+
+<!--Deuxième formulaire : création de l'enregistrement dans la base-->
+{% if filename %}
+<form class="form" method="POST" action="/enregistrer">
 		<div>
-			<input type="file" name="image" autocomplete="off" required><br/>
 			Nom vernaculaire : <input class="font-italic" type="text" name="vernaculaire"><br/>
 			Nom latin : <input class="font-italic" type="text" name="latin"><br/>
 			Description : <input class="font-italic" type="text" name="description"><br/>
@@ -45,10 +58,10 @@
 				<option value="3">(m)</option>
 			</select>
 		</div>
-    </dl>
     <p>
-		<input type="submit" value="Submit">
+		<input type="submit" value="Enregistrer">
 	</p>
 </form>
+{% endif %}
 {% endblock %}
 </html>

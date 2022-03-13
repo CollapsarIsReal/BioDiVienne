@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 # Crédits Roy's tutorial : https://roytuts.com/upload-and-display-image-using-python-flask/
 import os
-import flask_login
+#import flask_login
 #from app import app
 import urllib.request
 from flask import flash, redirect, url_for
@@ -27,9 +27,9 @@ app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 # flask_login
-import flask_login
-login_manager = flask_login.LoginManager()
-login_manager.init_app(app)
+#import flask_login
+#login_manager = flask_login.LoginManager()
+#login_manager.init_app(app)
 
 # On crée nos différents modèles
 class Personne(db.Model):
@@ -105,14 +105,44 @@ def recherche():
 @app.route("/charger")
 #fonction pour charger une photo
 def upload_form():
-    return render_template("upload.html")
+    return render_template("upload6OK.html")
 
 
 @app.route("/upload", methods=['POST'])
 def upload_image():
-    titre = request.args.get("titre", None)
-    flash(titre)
+    #titre = request.args.get("titre", None)
+    #flash(titre)
     if 'file' not in request.files:
+        flash('No file part')
+        return redirect(request.url)
+    file = request.files['file']
+    #flash(file)
+    if file.filename == '':
+        flash('No image selected for uploading')
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        flash("L'image a été correctement téléchargée.")
+
+        #photo = Photo(id='88', titre='nouvelle ', lien_interne=filename, compte_id='3')
+        #db.session.add(photo)
+        #db.session.commit()
+
+        #return render_template('upload3.html', filename=filename)
+        return render_template('upload6OK.html', filename=filename)
+    else:
+        flash('Allowed image types are -> png, jpg, jpeg, gif')
+        return redirect(request.url)
+
+@app.route("/enregistrer", methods=['GET'])
+def enregistrer_image():
+    vernaculaire = request.args.get("vernaculaire", None)
+    flash(vernaculaire)
+    filename = request.args.get("image", None)
+    flash(filename)
+    """
+    "if 'file' not in request.files:
         flash('No file part')
         return redirect(request.url)
     file = request.files['file']
@@ -124,15 +154,19 @@ def upload_image():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         flash("L'image a été correctement téléchargée.")
+        
 
-        photo = Photo(id='88', titre='nouvelle photo', lien_interne=filename, compte_id='3')
-        db.session.add(photo)
-        db.session.commit()
-
-        return render_template('upload.html', filename=filename)
+    photo = Photo(id='88', titre='nouvelle ', lien_interne=filename, compte_id='3')
+    db.session.add(photo)
+    db.session.commit()
+    """
+    return render_template('upload3.html', filename=filename)
+    """
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)
+    
+    """
 
 
 @app.route('/display/<filename>')
@@ -153,6 +187,10 @@ def espece_faune():
 @app.route('/flore')
 def espece_flore():
     return render_template('espece_flore.html')
+
+@app.route('/apropos')
+def page_apropos():
+    return render_template('apropos.html')
 
 
 if __name__ == "__main__":
