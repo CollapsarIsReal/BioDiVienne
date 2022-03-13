@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+{% extends "conteneur3.html" %}
+{% block corps %}
+
+<title>Python Flask Image Upload and Display Example</title>
+<h2>Select an image to upload and display</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+	<div>
+		<img src="{{
+		url_for('display_image', filename=filename) }}">
+	</div>
+{% endif %}
+
+<!--Premier formulaire : charger le fichier -->
+<form method="post" action="/upload" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+			<input type="text" name="titre">
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Submit">
+	</p>
+</form>
+
+<!--Deuxième formulaire : création de l'enregistrement dans la base-->
+{% if filename %}
+<form class="form" method="POST" action="/enregistrer">
+		<div>
+			Nom vernaculaire : <input class="font-italic" type="text" name="vernaculaire"><br/>
+			Nom latin : <input class="font-italic" type="text" name="latin"><br/>
+			Description : <input class="font-italic" type="text" name="description"><br/>
+			Décret juridique : <input type="text" name="décret juridique"><br/>
+			Statut jurique :
+			<select class="form-select" aria-label="Default select example">
+			  <option value="1">Non connue</option>
+			  <option value="2">P</option>
+			  <option value="3">p2</option>
+				<option value="3">p3</option>
+				<option value="3">p4B</option>
+				<option value="3">p5</option>
+				<option value="3">p5</option>
+				<option value="3">C</option>
+				<option value="3">C1</option>
+				<option value="3">C2</option>
+				<option value="3">C3</option>
+				<option value="3">N</option>
+				<option value="3">(m)</option>
+			</select>
+		</div>
+    <p>
+		<input type="text" name="fichier" value={{filename}}>
+		<input type="submit" value="Enregistrer">
+	</p>
+</form>
+{% endif %}
+{% endblock %}
+</html>
