@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 # Crédits Roy's tutorial : https://roytuts.com/upload-and-display-image-using-python-flask/
 import os
+#import flask_login
 #from app import app
 import urllib.request
 from flask import flash, redirect, url_for
@@ -15,6 +16,8 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+#INITIALISATION DES VARIABLES
 app = Flask("Application")
 #On configure la base données
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///BioDivVie2.db'
@@ -23,6 +26,10 @@ db = SQLAlchemy(app)
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
+# flask_login
+#import flask_login
+#login_manager = flask_login.LoginManager()
+#login_manager.init_app(app)
 
 # On crée nos différents modèles
 class Personne(db.Model):
@@ -49,12 +56,13 @@ class Photo(db.Model):
 
 class Espece(db.Model):
     id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
+    fichier = db.Column(db.Text, unique=True, nullable=False)
+    regne = db.Column(db.Text, nullable=False) #peut-être faire du booléen 0=vegetal et 1=animal ?
     nom_vernaculaire = db.Column(db.Text)
     nom_latin = db.Column(db.Text)
     description = db.Column(db.Text)
-    decret_juridique = db.Column(db.Text)
-    statut_juridique = db.Column(db.Text)
-
+    statut_juridique = db.Column(db.Text) #faire un choix déroulant avec les lettres
+    preocupation = db.Column(db.Text) #faire liste selon LRN ou LRR avec lettres déroulantes
 
 
 @app.route("/image/<int:id>")
@@ -66,7 +74,7 @@ def image(id):
 @app.route("/")
 def accueil(exemple=None):
     images = Photo.query.all()
-    return render_template("accueil2OK.html", bananes=images)
+    return render_template("accueil3.html", bananes=images)
 
 
 @app.route("/accueil")
@@ -92,24 +100,25 @@ def recherche():
             Photo.titre.like("%{}%".format(motclef))
         ).all()
         titre = "Résultat pour la recherche `" + motclef + "`"
-    return render_template("formOK.html", resultats=resultats, titre=titre)
+    return render_template("form3.html", resultats=resultats, titre=titre)
 
 
 @app.route("/charger")
 #fonction pour charger une photo
 def upload_form():
-    return render_template("upload.html")
+    return render_template("charger9OK.html")
 
 
 @app.route("/upload", methods=['POST'])
 def upload_image():
-    titre = request.args.get("titre", None)
-    flash(titre)
+    #titre = request.args.get("titre", None)
+    espece_id = request.args.get("id")
+    #flash(titre)
     if 'file' not in request.files:
         flash('No file part')
         return redirect(request.url)
     file = request.files['file']
-    flash(file)
+    #flash(file)
     if file.filename == '':
         flash('No image selected for uploading')
         return redirect(request.url)
@@ -118,26 +127,70 @@ def upload_image():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         flash("L'image a été correctement téléchargée.")
 
-        photo = Photo(id='88', titre='nouvelle photo', lien_interne=filename, compte_id='3')
-        db.session.add(photo)
+        espece = Espece(id=espece_id, fichier=filename)
+        db.session.add(espece)
         db.session.commit()
 
-        return render_template('upload.html', filename=filename)
+        #return render_template('upload3.html', filename=filename)
+        return render_template('charger9OK.html', filename=filename)
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)
 
+@app.route("/enregistrer", methods=['GET'])
+def enregistrer_image():
+    regne = request.args.get("regne", None)
+    vernaculaire = request.args.get("nom_vernculaire", None)
+    latin = request.args.get("nom_latin", None)
+    description = request.args.get("statut juridique", None)
+    preoccupation = request.args.get("vernaculaire", None)
+    filename = request.args.get("image", None)
 
-@app.route('/display/<filename>')
+    if request.method == "GET":
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            flash("L'image a été correctement téléchargée.")
+    else :
+        flash('Allowed image types are -> png, jpg, jpeg, gif')
+        return redirect(request.url)
+
+
+@app.route('/faune')
+def espece_faune():
+    espece = Espece.query.all()
+    return render_template('espece_faune.html', espece=espece)
+
+
+@app.route('/apropos')
+def page_apropos():
+   return render_template('apropos.html')
+
+#photo = Photo(id='88', titre='nouvelle ', lien_interne=filename, compte_id='3')
+#db.session.add(photo)
+#db.session.commit()
+"""
+return render_template('upload3.html', filename=filename)
+"""
+
+
+
+#@app.route('/display/<filename>')
 #affiche l'image depuis le repertoire static
-def display_image(filename):
-    return redirect(url_for('static', filename='uploads/' + filename), code=301)
+#def display_image(filename):
+ #   return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
-@app.route('/modifier/<photoid>')
-def image_modif(photoid):
+#@app.route('/modifier/<photoid>')
+#def image_modif(photoid):
     #photo = Photo.query.filter(id=photoid)
-    photo = Photo.query.get(photoid)
-    return render_template('modifier2.html', photo=photo)
+ #   photo = Photo.query.get(photoid)
+  #  return render_template('modifier2.html', photo=photo)
+
+
+#@app.route('/flore')
+#def espece_flore():
+ #   return render_template('espece_flore.html')
+
 
 
 if __name__ == "__main__":

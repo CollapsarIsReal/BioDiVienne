@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+{% extends "conteneur3.html" %}
+{% block corps %}
+
+
+{% if filename %}
+	<h2>Hello</h2>
+	<div>
+		<img src="{{
+		url_for('display_image', filename=filename) }}", class="responsive">
+	</div>
+
+{% endif %}
+
+<!--Deuxième formulaire : création de l'enregistrement dans la base-->
+{% if filename %}
+		<div>
+			Nom vernaculaire : <input class="font-italic" type="text" name="vernaculaire"><br/>
+			Nom latin : <input class="font-italic" type="text" name="latin"><br/>
+			Description : <input class="font-italic" type="text" name="description"><br/>
+			Décret juridique : <input type="text" name="décret juridique"><br/>
+			Statut jurique :
+			<select class="form-select" aria-label="Default select example">
+			  <option value="1">Non connue</option>
+			  <option value="2">P</option>
+			  <option value="3">p2</option>
+				<option value="3">p3</option>
+				<option value="3">p4B</option>
+				<option value="3">p5</option>
+				<option value="3">p5</option>
+				<option value="3">C</option>
+				<option value="3">C1</option>
+				<option value="3">C2</option>
+				<option value="3">C3</option>
+				<option value="3">N</option>
+				<option value="3">(m)</option>
+			</select>
+		</div>
+    <p>
+		<input type="text" name="fichier" value={{filename}}>
+		<input type="submit" value="Enregistrer">
+	</p>
+</form>
+{% endif %}
+{% endblock %}
+</html>

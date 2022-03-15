@@ -6,17 +6,17 @@
 
    {% include "partials/form.html" %}
 
-    <h1>{{titre}}</h1>
+<h3>Recherche : {{critere}}</h3>
     {% if resultats|length == 0 %}
-    <p>Désolée aucune photo trouvée.</p>
+    <p>Désolée aucune espèce trouvée.</p>
     {% elif resultats|length == 1 %}
     <p>Il y a {{resultats|length}} photo qui correspond à votre requête :</p>
     {% else %}
     <p>Il y a {{resultats|length}} photos qui correspondent à votre requête :</p>
     {% endif %}
     <ul>
-        {% for photo in resultats %}
-                        <li><a href="{{url_for('image', id=photo.id)}}">{{photo.titre}}</a></li>
+        {% for espece in resultats %}
+                        <li><a href="{{url_for('image', id=espece.id)}}">{{espece.nom_vernaculaire}}</a></li>
             {% endfor %}
 
         </ul>
