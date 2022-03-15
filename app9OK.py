@@ -56,12 +56,13 @@ class Photo(db.Model):
 
 class Espece(db.Model):
     id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
+    fichier = db.Column(db.Text, unique=True, nullable=False)
+    regne = db.Column(db.Text, nullable=False) #peut-être faire du booléen 0=vegetal et 1=animal ?
     nom_vernaculaire = db.Column(db.Text)
     nom_latin = db.Column(db.Text)
     description = db.Column(db.Text)
-    decret_juridique = db.Column(db.Text)
-    statut_juridique = db.Column(db.Text)
-
+    statut_juridique = db.Column(db.Text) #faire un choix déroulant avec les lettres
+    preoccupation = db.Column(db.Text) #faire liste selon LRN ou LRR avec lettres déroulantes
 
 
 @app.route("/image/<int:id>")
@@ -105,12 +106,13 @@ def recherche():
 @app.route("/charger")
 #fonction pour charger une photo
 def upload_form():
-    return render_template("upload6OK.html")
+    return render_template("charger9OK.html")
 
 
 @app.route("/upload", methods=['POST'])
 def upload_image():
     #titre = request.args.get("titre", None)
+    espece_id = request.args.get("id")
     #flash(titre)
     if 'file' not in request.files:
         flash('No file part')
@@ -125,17 +127,17 @@ def upload_image():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         flash("L'image a été correctement téléchargée.")
 
-        #photo = Photo(id='88', titre='nouvelle ', lien_interne=filename, compte_id='3')
-        #db.session.add(photo)
-        #db.session.commit()
+        espece = Espece(id=espece_id, fichier=filename)
+        db.session.add(espece)
+        db.session.commit()
 
         #return render_template('upload3.html', filename=filename)
-        return render_template('upload6OK.html', filename=filename)
+        return render_template('charger9OK.html', filename=filename)
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)
 
-@app.route("/enregistrer", methods=['GET'])
+@app.route("/enregistrer", methods=['POST'])
 def enregistrer_image():
     vernaculaire = request.args.get("vernaculaire", None)
     flash(vernaculaire)

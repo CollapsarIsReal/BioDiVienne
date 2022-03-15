@@ -1,6 +1,30 @@
 {% extends "conteneur3.html" %}
-{% block corps %}
-<html lang="en">
-<p>Regroupement des photos de la faune</p>
-</html>
+
+{% block titre %}
+    {%if espece %}| Espece : {{espece.nom_vernaculaire}} {% endif %}
 {% endblock %}
+
+{% block corps %}
+    {% if espece %}
+            <p>Il y a une espèce enregistrée :</p>
+            <h1>{{espece.nom_vernaculaire}}</h1>
+            <h2>{{espece.nom_latin}}</h2>
+            <dl>
+                <dt>Statut juridique</dt><dd>{{espece.statut_juridique}}</dd>
+                <dt>Préocupation</dt><dd>{{espece.preocupation}}</dd>
+                <dt>Description</dt><dd>{{espece.description}}</dd>
+            </dl>
+        {% elif especes %}
+        <p>Il y a {{ espece|length }} enregistrées :
+        <ul>
+            {% for espece in especes %}
+                <li><a href="{{url_for('faune', espece=espece)}}">{{espece.nom_vernaculaire}}, {{espece.nom_latin}}</a></li>
+            {% endfor %}
+        </ul></p>
+        {% else %}
+            <p>La base de données est en cours de constitution</p>
+        {% endif %}
+        <p>
+        <a href="{{url_for('accueil')}}">Retour à l'accueil</a>
+        </p>
+{% endblock %}}

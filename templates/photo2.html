@@ -1,20 +1,20 @@
-{% extends "conteneur2.html" %}
+{% extends "conteneur3.html" %}
 
 {% block titre %}
-    {%if photo %}| Photo : {{photo.titre}} {% endif %}
+    {%if espece %}| Espece : {{espece.nom_vernaculaire}} {% endif %}
 {% endblock %}
 
 {% block corps %}
-    {% if photo %}
-        <h1>{{photo.titre}}</h1>
+    {% if espece %}
+        <h1>{{espece.nom_vernaculaire}}</h1>
             <ul>
                 <!-- tâche : parvenir à faire un if s'il y a une description -->
-                <li><img src=/display/{{photo.lien_interne}} width="50%"></l></li>
+                <li><img src=/display/{{espece.fichier}} width="50%"></l></li>
                     {% if description %}
-                    <li>Description: {{photo.description}}</li>
+                    <li>Description: {{espece.description}}</li>
                     {% else %}
                     {% endif %}
-                <li><p><i>Photo ajoutée par l'utilisateur <strong>{{photo.compte.pseudo}}</strong></i></p></li>
+                <li>
 
             </ul>
 
