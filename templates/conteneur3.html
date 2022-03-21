@@ -29,7 +29,9 @@
               Espèces
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item nav-link" href="{{url_for('upload_form')}}">Enregistrer une espèce</a>
               <a class="dropdown-item nav-link" href="{{url_for('espece_faune')}}">Faune</a>
+                <a class="dropdown-item nav-link" href="#">Flore</a>
             </div>
           </li>
             <li class="nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
@@ -84,4 +86,20 @@
         </div>
     </div>
 </body>
+
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-muted">&copy; 2022 E.Falcoz</p>
+
+    <a name="favicon" href="pavot.png" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="{{url_for('accueil')}}" class="nav-link px-2 text-muted">Accueil</a></li>
+      <li class="nav-item"><a href="{{url_for('page_apropos')}}" class="nav-link px-2 text-muted">A propos</a></li>
+
+    </ul>
+  </footer>
+</div>
 </html>

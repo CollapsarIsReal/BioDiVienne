@@ -1,0 +1,19 @@
+{% extends "conteneur3.html" %}
+
+{% block titre %}
+    {{name}}
+{% endblock %}
+{% block corps %}
+	<p>{% if especes %}
+        Il y a {{ especes|length }} enregistrées :
+        <ul>
+            {% for espece in especes %}
+            <li><a href="{{url_for('espece', id=espece.id)}}">{{espece.nom_vernaculaire}}</a></li>
+            <li><img src=/display/{{espece.fichier}} width="50%"></li>
+        </ul>
+
+        {% endfor %}
+        {% endif %}
+    </p>
+
+{% endblock %}
