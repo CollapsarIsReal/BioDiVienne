@@ -177,8 +177,8 @@ def espece_faune():
         #    Espece.fichier.like("%{}%".format(regne))
         #).all()
         #critère = "Résultat pour la recherche `" + motclef + "`"
-   # return render_template('espece_faune2.html', resultats=resultats,  espece=espece)
-    return render_template('espece_faune2.html', espece=especes)
+   # return render_template('regne.html', resultats=resultats,  espece=espece)
+    return render_template('regne.html', espece=especes)
 
 
 @app.route('/flore')
