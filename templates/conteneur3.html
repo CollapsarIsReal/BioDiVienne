@@ -30,11 +30,12 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item nav-link" href="{{url_for('upload_form')}}">Enregistrer une espèce</a>
-              <a class="dropdown-item nav-link" href="{{url_for('espece_faune')}}">Faune</a>
-                <a class="dropdown-item nav-link" href="#">Flore</a>
+              <a class="dropdown-item nav-link" href="{{url_for('regne', id='1')}}">Animal</a>
+                <a class="dropdown-item nav-link" href="{{url_for('regne', id='2')}}">Végétal</a>
+                <a class="dropdown-item nav-link" href="{{url_for('regne', id='0')}}">Tout</a>
             </div>
           </li>
-            <li class="nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
+            <li class="nav-item">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Outils
             </a>

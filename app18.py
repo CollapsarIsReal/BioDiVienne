@@ -160,25 +160,21 @@ def espece_modif(especeid):
     espece = Espece.query.get(especeid)
     return render_template('modifier2.html', espece=espece)
 
-@app.route('/faune')
-def espece_faune():
+@app.route('/regne/<int:id>')
+# 0 signigie règne animal et 1 signifie règne vegetal
+def regne(id):
     # On préfèrera l'utilisation de .get() ici
     #   qui nous permet d'éviter un if long (if "clef" in dictionnaire and dictonnaire["clef"])
-    especes = Espece.query.all()
-    flash(especes)
-    #regne = Espece.query.filter(Espece.regne.like("faune".formal(regne)))).all()
-    # On crée une liste vide de résultat (qui restera vide par défaut
-    #   si on n'a pas de mot clé)
-    #resultats = []
-    # On fait de même pour le titre de la page
-    #for espece in especes :
-        #if espece:
-       # resultats = Espece.query.filter(
-        #    Espece.fichier.like("%{}%".format(regne))
-        #).all()
-        #critère = "Résultat pour la recherche `" + motclef + "`"
-   # return render_template('espece_faune2.html', resultats=resultats,  espece=espece)
-    return render_template('espece_faune2.html', espece=especes)
+    especes = []
+    if id == 0:
+        especes = Espece.query.all()
+    elif id == 1:
+        especes = Espece.query.filter(Espece.regne.like("animal")).all()
+    elif id == 2:
+        especes = Espece.query.filter(Espece.regne.like("vegetal")).all()
+    else:
+        especes = []
+    return render_template('regne.html', especes=especes)
 
 
 @app.route('/flore')
