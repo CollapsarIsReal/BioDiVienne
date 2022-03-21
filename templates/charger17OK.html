@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+{% extends "conteneur3.html" %}
+{% block corps %}
+
+<title>Python Flask Image Upload and Display Example</title>
+<div class="container">
+	{% if filename %}
+	<div class="row align-items-start">
+		<div class="col">
+			<img src="{{url_for('display_image', filename=filename) }}" class="img-fluid">
+		</div>
+		<div class="col">
+		<form class="form" method="POST" action="/enregistrer" id="enreg">
+			<div class="mb-3">
+                <label class="form-label">Nom vernaculaire</label>
+                <input type="text" class="form-control" id="vernaculaire" name="vernaculaire">
+              </div>
+			<div class="mb-3">
+                <label class="form-label">Nom latin</label>
+                <input type="text" class="form-control" id="latin" name="latin">
+              </div>
+			<div class="mb-3">
+                <label class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="description">
+              </div>
+			<label for="regne">Règne</label>
+      <select name="regne" id="regne">
+        <option value="animal">Animal</option>
+        <option value="vegetal">Vegetal</option>
+      </select>
+			<label for="preoc">Preoccupation</label>
+      <select name="preoccupation" id="preoc">
+        <option value="LC">LC</option>
+		  <option value="NT">NT</option>
+		  <option value="VU">VU</option>
+		  <option value="EN">EN</option>
+		  <option value="CR">CR</option>
+		  <option value="RE">RE</option>
+      </select>
+
+		<input type="text" name="fichier" value={{filename}}>
+		<input type="submit" value="Enregistrer">
+
+</form>
+	</div>
+	</div>
+
+	<p style="color:green;">L'image a été correctement chargée</p>
+
+	<!--Deuxième formulaire : création de l'enregistrement dans la base-->
+	{% else %}
+	<!--Premier formulaire : charger le fichier -->
+	<div class="row align-items-start">
+    <div class="col">
+		<h2 style="text-align: center;">Selectionner une image</h2>
+	</div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col">
+<form method="post" action="/upload" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input class="btn btn-outline-primary" type="submit" id="bouton_charger" value="Valider">
+	</p>
+</form>
+	{% endif %}
+
+
+
+
+
+{% endblock %}
+</html>

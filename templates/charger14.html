@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+{% extends "conteneur3.html" %}
+{% block corps %}
+
+<title>Python Flask Image Upload and Display Example</title>
+<h2>Select an image to upload and display</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+	<div>
+		<img src="{{
+		url_for('display_image', filename=filename) }}">
+	</div>
+
+{% else %}
+<!--Premier formulaire : charger le fichier -->
+<form method="post" action="/upload" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+			<input type="text" name="titre">
+		</p>
+    </dl>
+    <p>
+		<input type="submit" value="Submit">
+	</p>
+</form>
+{% endif %}
+
+<!--Deuxième formulaire : création de l'enregistrement dans la base-->
+{% if filename %}
+<form class="form" method="POST" action="/enregistrer" id="enreg">
+		<div>
+			<label for="regne">Règne</label>
+      <select name="regne" id="regne">
+        <option value="animal">Animal</option>
+        <option value="vegetal">Vegetal</option>
+      </select>
+			Nom vernaculaire : <input class="font-italic" type="text" name="vernaculaire"><br/>
+			Nom latin : <input class="font-italic" type="text" name="latin"><br/>
+			Description : <input class="font-italic" type="text" name="description"><br/>
+			Statut juridique : <input type="text" name="statut_juridique"><br/>
+			Préoccupation : <input type="text" name="preoccupation"><br/>
+		</div>
+    <p>
+		<input type="text" name="fichier" value={{filename}}>
+		<input type="submit" value="Enregistrer">
+	</p>
+</form>
+<label for="cars">Choose a car:</label>
+<select id="cars" name="carlist" form="enreg">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+{% endif %}
+{% endblock %}
+</html>

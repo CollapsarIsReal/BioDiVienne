@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+{% extends "conteneur3.html" %}
+{% block corps %}
+
+<title>Python Flask Image Upload and Display Example</title>
+<div class="container">
+	{% if filename %}
+	<div class="row align-items-start">
+		<div class="col">
+			<img src="{{url_for('display_image', filename=filename) }}" class="img-fluid">
+		</div>
+		<div class="col">
+		<form class="form" method="POST" action="/enregistrer" id="enreg">
+			<label for="regne">Règne</label>
+      <select name="regne" id="regne">
+        <option value="animal">Animal</option>
+        <option value="vegetal">Vegetal</option>
+      </select>
+			Nom vernaculaire : <input class="font-italic" type="text" name="vernaculaire"><br/>
+			Nom latin : <input class="font-italic" type="text" name="latin"><br/>
+			Description : <input class="font-italic" type="text" name="description"><br/>
+			Statut juridique : <input type="text" name="statut_juridique"><br/>
+			Préoccupation : <input type="text" name="preoccupation"><br/>
+
+		<input type="text" name="fichier" value={{filename}}>
+		<input type="submit" value="Enregistrer">
+
+</form>
+	</div>
+	</div>
+
+	<p style="color:green;">L'image a été correctement chargée</p>
+
+	<!--Deuxième formulaire : création de l'enregistrement dans la base-->
+
+<label for="cars">Choose a car:</label>
+<select id="cars" name="carlist" form="enreg">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="opel">Opel</option>
+  <option value="audi">Audi</option>
+</select>
+	{% else %}
+	<!--Premier formulaire : charger le fichier -->
+	<div class="row align-items-start">
+    <div class="col">
+		<h2 style="text-align: center;">Selectionner une image</h2>
+	</div>
+  </div>
+  <div class="row align-items-center">
+    <div class="col">
+<form method="post" action="/upload" enctype="multipart/form-data">
+    <dl>
+		<p>
+			<input type="file" name="file" autocomplete="off" required>
+		</p>
+    </dl>
+    <p>
+		<input class="btn btn-outline-primary" type="submit" id="bouton_charger" value="Valider">
+	</p>
+</form>
+	{% endif %}
+
+
+
+
+
+{% endblock %}
+</html>
