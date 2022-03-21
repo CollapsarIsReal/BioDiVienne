@@ -1,20 +1,30 @@
 {% extends "conteneur3.html" %}
 
-{% block titre %}
-    {%if espece %}| Espece : {{espece.nom_vernaculaire}} {% endif %}
-{% endblock %}
-
 {% block corps %}
     {% if espece %}
-        <h1>{{espece.nom_vernaculaire}}</h1>
-                <!-- tâche : parvenir à faire un if s'il y a une description -->
-        <img src=/display/{{espece.fichier}} width="50%" class="img-thumbnail"></l></li>
-            {% if description %}
-                Description: {{espece.description}}</li>
-                {% else %}
-                {% endif %}
+<div>
+<div class="row align-items-start">
+		<div class="col">
+            <img src=/display/{{espece.fichier}} class="img-fluid" class="img-responsive">
+		</div>
+		<div class="col">
+			<h2>{{espece.nom_vernaculaire}}</h2>
+            <h4><i>{{espece.nom_latin}}</i></h4>
+			<div class="mb-3">
+                <label class="form-label">{{espece.description}}</label>
+              </div>
+            <div class="mb-3">
+                <label class="form-label">Indice de préoccupation de la Liste rouge nationale (LRN) : {{espece.preoccupation}}</label>
+        </div>
+</div>
+</div>
     {% else %}
+            <div class="row align-items-start">
+                <div class="col">
         <p>La base de données est en cours de constitution</p>
+                    </div>
+            </div>
     {% endif %}
     <p><a href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
+
 {% endblock %}
