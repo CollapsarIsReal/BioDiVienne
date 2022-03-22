@@ -4,8 +4,27 @@
     <list default="true" id="5af2ecb5-3b0b-44de-9475-79bc89a3b0b9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BioDivVie2.db" beforeDir="false" afterPath="$PROJECT_DIR$/BioDivVie2.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app18.py" beforeDir="false" afterPath="$PROJECT_DIR$/app18OK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/photo2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/photo2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app10.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app11.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app12.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app13OK.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app14.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app15.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app16.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app16OK.py" beforeDir="false" afterPath="$PROJECT_DIR$/app16OK.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app17OK.py" beforeDir="false" afterPath="$PROJECT_DIR$/app17OK.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app18OK.py" beforeDir="false" afterPath="$PROJECT_DIR$/app18OK.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app9OK.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/images/gallica_btv1b55007071f.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/charger13OK.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/charger14.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/charger15.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/charger16OK.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/conteneur3.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/conteneur3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/espece_faune.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/espece_flore.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/css.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/css.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/photo2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/espece.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +56,12 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates" />

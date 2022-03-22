@@ -67,7 +67,7 @@ class Espece(db.Model):
 @app.route("/espece/<int:id>")
 def espece(id):
     unique_espece = Espece.query.get(id)
-    return render_template("photo2.html", espece=unique_espece)
+    return render_template("espece.html", espece=unique_espece)
 
 
 @app.route("/")
@@ -176,10 +176,6 @@ def regne(id):
         especes = []
     return render_template('regne.html', especes=especes)
 
-
-@app.route('/flore')
-def espece_flore():
-    return render_template('espece_flore.html')
 
 @app.route('/apropos')
 def page_apropos():

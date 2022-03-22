@@ -5,25 +5,44 @@
 
 <title>Python Flask Image Upload and Display Example</title>
 <div class="container">
+
+		<!--Deuxième formulaire : création de l'enregistrement dans la base-->
 	{% if filename %}
 	<div class="row align-items-start">
 		<div class="col">
 			<img src="{{url_for('display_image', filename=filename) }}" class="img-fluid">
 		</div>
 		<div class="col">
+			<h2><i>Caractéristiques de l'espèce :</i></h2>
 		<form class="form" method="POST" action="/enregistrer" id="enreg">
+			<div class="mb-3">
+                <label class="form-label">Nom vernaculaire</label>
+                <input type="text" class="form-control" id="vernaculaire" name="vernaculaire">
+              </div>
+			<div class="mb-3">
+                <label class="form-label">Nom latin</label>
+                <input type="text" class="form-control" id="latin" name="latin">
+              </div>
+			<div class="mb-3">
+                <label class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="description">
+              </div>
 			<label for="regne">Règne</label>
       <select name="regne" id="regne">
         <option value="animal">Animal</option>
         <option value="vegetal">Vegetal</option>
-      </select>
-			Nom vernaculaire : <input class="font-italic" type="text" name="vernaculaire"><br/>
-			Nom latin : <input class="font-italic" type="text" name="latin"><br/>
-			Description : <input class="font-italic" type="text" name="description"><br/>
-			Statut juridique : <input type="text" name="statut_juridique"><br/>
-			Préoccupation : <input type="text" name="preoccupation"><br/>
+      </select></br>
+			<label for="preoc">Preoccupation</label>
+      <select name="preoccupation" id="preoc">
+        <option value="LC">LC</option>
+		  <option value="NT">NT</option>
+		  <option value="VU">VU</option>
+		  <option value="EN">EN</option>
+		  <option value="CR">CR</option>
+		  <option value="RE">RE</option>
+      </select></br>
 
-		<input type="text" name="fichier" value={{filename}}>
+		<input type="hidden" name="fichier" value={{filename}}>
 		<input type="submit" value="Enregistrer">
 
 </form>
@@ -32,20 +51,12 @@
 
 	<p style="color:green;">L'image a été correctement chargée</p>
 
-	<!--Deuxième formulaire : création de l'enregistrement dans la base-->
-
-<label for="cars">Choose a car:</label>
-<select id="cars" name="carlist" form="enreg">
-  <option value="volvo">Volvo</option>
-  <option value="saab">Saab</option>
-  <option value="opel">Opel</option>
-  <option value="audi">Audi</option>
-</select>
 	{% else %}
 	<!--Premier formulaire : charger le fichier -->
 	<div class="row align-items-start">
     <div class="col">
-		<h2 style="text-align: center;">Selectionner une image</h2>
+		<p>
+		<h2 style="text-align: center;">Selectionner une image</h2></p>
 	</div>
   </div>
   <div class="row align-items-center">
