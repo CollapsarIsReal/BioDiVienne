@@ -25,7 +25,7 @@
             <a class="nav-link" href="{{url_for('accueil')}}">Accueil</a>
           </li>
           <li class="nav-item dropdown nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="EspecesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Espèces
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -50,17 +50,17 @@
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{url_for('recherche')}}" method="GET">
-            <a class="nav-link" src="{{url_for('recherche')}}" href="{{url_for('recherche')}}">Rechercher</a>
+            <a class="nav-link" src="{{url_for('recherche')}}" href="{{url_for('recherche')}}">Rechercher</a> <!--différence src et href-->
 
         </form>
         <ul class="navbar-nav mr-auto">
-             <li class="nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item dropdown nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
+            <a class="nav-link dropdown-toggle" href="#" id="CompteDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Compte
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item nav-link">Se connecter</a>
-              <a class="dropdown-item nav-link">Inscription</a>
+                <a class="dropdown-item nav-link" href="{{url_for('connexion')}}">Connexion</a>
+              <a class="dropdown-item nav-link" href="#">Inscription</a>
             </div>
           </li>
         </ul>

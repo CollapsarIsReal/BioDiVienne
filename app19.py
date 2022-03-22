@@ -61,27 +61,26 @@ class Espece(db.Model):
     nom_vernaculaire = db.Column(db.Text)
     nom_latin = db.Column(db.Text)
     description = db.Column(db.Text)
-    statut_juridique = db.Column(db.Text) #faire un choix déroulant avec les lettres
     preoccupation = db.Column(db.Text) #faire liste selon LRN ou LRR avec lettres déroulantes
 
 
-@app.route("/image/<int:id>")
-def image(id):
-    unique_image = Photo.query.get(id)
-    return render_template("photo2.html", photo=unique_image)
+@app.route("/espece/<int:id>")
+def espece(id):
+    unique_espece = Espece.query.get(id)
+    return render_template("espece.html", espece=unique_espece)
 
 
 @app.route("/")
-def accueil(exemple=None):
-    images = Photo.query.all()
-    return render_template("accueil3.html", bananes=images)
+def accueil_(exemple=None):
+    especes = Espece.query.all()
+    return render_template("accueil4.html", especes=especes)
 
 
 @app.route("/accueil")
 #fonction de lancement de la page d'accueil
-def accueil2(exemple=None):
-    images = Photo.query.all()
-    return render_template("accueil2OK.html", bananes=images)
+def accueil(exemple=None):
+    especes = Espece.query.all()
+    return render_template("accueil4.html", especes=especes)
 
 
 @app.route("/recherche")
@@ -89,36 +88,30 @@ def recherche():
     # On préfèrera l'utilisation de .get() ici
     #   qui nous permet d'éviter un if long (if "clef" in dictionnaire and dictonnaire["clef"])
     motclef = request.args.get("keyword", None)
-    param2 = request.args.get("param2", None)
     # On crée une liste vide de résultat (qui restera vide par défaut
     #   si on n'a pas de mot clé)
     resultats = []
     # On fait de même pour le titre de la page
-    titre = "Recherche"
     if motclef:
-        resultats = Photo.query.filter(
-            Photo.titre.like("%{}%".format(motclef))
+        resultats = Espece.query.filter(
+            Espece.fichier.like("%{}%".format(motclef))
         ).all()
-        titre = "Résultat pour la recherche `" + motclef + "`"
-    return render_template("form3.html", resultats=resultats, titre=titre)
+        critère = "Résultat pour la recherche `" + motclef + "`"
+    return render_template("form3.html", resultats=resultats, critere=motclef)
 
 
 @app.route("/charger")
-#fonction pour charger une photo
+#fonction pour enregistrer une espèce
 def upload_form():
-    return render_template("charger9OK.html")
+    return render_template("charger19.html")
 
 
 @app.route("/upload", methods=['POST'])
 def upload_image():
-    #titre = request.args.get("titre", None)
-    espece_id = request.args.get("id")
-    #flash(titre)
     if 'file' not in request.files:
         flash('No file part')
         return redirect(request.url)
     file = request.files['file']
-    #flash(file)
     if file.filename == '':
         flash('No image selected for uploading')
         return redirect(request.url)
@@ -127,68 +120,79 @@ def upload_image():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         flash("L'image a été correctement téléchargée.")
 
-        espece = Espece(id=espece_id, fichier=filename)
-        db.session.add(espece)
-        db.session.commit()
-
-        #return render_template('upload3.html', filename=filename)
-        return render_template('charger9OK.html', filename=filename)
+        return render_template('charger19.html', filename=filename)
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)
 
 @app.route("/enregistrer", methods=['POST'])
 def enregistrer_image():
-    vernaculaire = request.args.get("vernaculaire", None)
-    flash(vernaculaire)
-    filename = request.args.get("image", None)
-    flash(filename)
-    """
-    "if 'file' not in request.files:
-        flash('No file part')
-        return redirect(request.url)
-    file = request.files['file']
-    flash(file)
-    if file.filename == '':
-        flash('No image selected for uploading')
-        return redirect(request.url)
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        flash("L'image a été correctement téléchargée.")
-        
+    data = request.form #c'est un tableau associatif (clé-valeur) appelé collection en python, ou dictionnaire de données
+    filename_data = data["fichier"]
+    regne_data = data["regne"]
+    vernaculaire_data = data["vernaculaire"]
+    latin_data = data["latin"]
+    description_data = data["description"]
+    preoccupation_data = data["preoccupation"]
 
-    photo = Photo(id='88', titre='nouvelle ', lien_interne=filename, compte_id='3')
-    db.session.add(photo)
+
+    espece = Espece(
+        fichier=filename_data,
+        nom_vernaculaire=vernaculaire_data,
+        nom_latin=latin_data,
+        description=description_data,
+        regne=regne_data,
+        preoccupation=preoccupation_data
+    )
+    db.session.add(espece)
     db.session.commit()
-    """
-    return render_template('upload3.html', filename=filename)
-    """
-    else:
-        flash('Allowed image types are -> png, jpg, jpeg, gif')
-        return redirect(request.url)
-    
-    """
+    return render_template('charger19.html', filename=filename_data)
 
 
 @app.route('/display/<filename>')
-#affiche l'image depuis le repertoire static
+# affiche l'image depuis le repertoire static
 def display_image(filename):
     return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
-@app.route('/modifier/<photoid>')
-def image_modif(photoid):
+@app.route('/modifier/<especeid>')
+def espece_modif(especeid):
     #photo = Photo.query.filter(id=photoid)
-    photo = Photo.query.get(photoid)
-    return render_template('modifier2.html', photo=photo)
+    espece = Espece.query.get(especeid)
+    return render_template('modifier2.html', espece=espece)
 
-@app.route('/faune')
-def espece_faune():
-    return render_template('espece_faune.html')
+@app.route('/regne/<int:id>')
+# permet de trier les espèces selon leur règne (animal ou vegetal):
+# id=0 renvoie toutes les espèces
+# id=1 renvoie les espèces du règne animal
+# id=1 renvoie les espèces du règne vegetal
 
-@app.route('/flore')
-def espece_flore():
-    return render_template('espece_flore.html')
+def regne(id):
+    especes = []
+    if id == 0:
+        especes = Espece.query.all()
+    elif id == 1:
+        especes = Espece.query.filter(Espece.regne.like("animal")).all()
+    elif id == 2:
+        especes = Espece.query.filter(Espece.regne.like("vegetal")).all()
+    else:
+        especes = []
+    return render_template('regne.html', especes=especes)
+
+
+@app.route("/connexion")
+def connexion():
+    data = request.form  # c'est un tableau associatif (clé-valeur) appelé collection en python, ou dictionnaire de données
+    email_data = data["email"]
+    motDePasse_data = data["mdp"]
+
+    compte = Compte(
+        email=email_data,
+        mdp=motDePasse_data
+    )
+    #db.session.add(compte)
+    #db.session.commit()
+    return render_template('form_connexion.html', email=email_data, mdp=motDePasse_data)
+
 
 @app.route('/apropos')
 def page_apropos():
@@ -198,6 +202,9 @@ def page_apropos():
 if __name__ == "__main__":
     app.run(debug=True)
 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-#faire un formulaire pour ajouter une photo en incluant l'image et son titre, pour permettre
-#une recherche sur la photo
+#OBJECTIFS DU 15 MARS 2022:
+# - terminer de mettre les champs pour toutes les colonnes de la base dans upload
+# - réaranger la redirection après les résultats
+# - bien déterminer ce que je veux faire avec mon appli (photo ou pas ?)
