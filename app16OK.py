@@ -99,7 +99,7 @@ def recherche():
             Espece.fichier.like("%{}%".format(motclef))
         ).all()
         critère = "Résultat pour la recherche `" + motclef + "`"
-    return render_template("form3.html", resultats=resultats, critere=motclef)
+    return render_template("chercher.html", resultats=resultats, critere=motclef)
 
 
 @app.route("/charger")

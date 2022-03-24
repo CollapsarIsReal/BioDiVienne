@@ -12,6 +12,7 @@ from werkzeug.utils import secure_filename
 UPLOAD_FOLDER = 'static/uploads/'
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+LIEUX_PAR_PAGE = 5
 
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -57,11 +58,12 @@ class Photo(db.Model):
 class Espece(db.Model):
     id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
     fichier = db.Column(db.Text, unique=True, nullable=False)
-    regne = db.Column(db.Text, nullable=False) #peut-être faire du booléen 0=vegetal et 1=animal ?
+    regne = db.Column(db.Text, nullable=False)
     nom_vernaculaire = db.Column(db.Text)
     nom_latin = db.Column(db.Text)
     description = db.Column(db.Text)
-    preoccupation = db.Column(db.Text) #faire liste selon LRN ou LRR avec lettres déroulantes
+    preoccupation = db.Column(db.Text)
+    droit_image = db.Column(db.Text)
 
 
 @app.route("/espece/<int:id>")
@@ -85,19 +87,37 @@ def accueil(exemple=None):
 
 @app.route("/recherche")
 def recherche():
+    """ Route permettant la recherche plein-texte
+    """
     # On préfèrera l'utilisation de .get() ici
     #   qui nous permet d'éviter un if long (if "clef" in dictionnaire and dictonnaire["clef"])
     motclef = request.args.get("keyword", None)
+    page = request.args.get("page", 1)
+
+    if isinstance(page, str) and page.isdigit():
+        page = int(page)
+    else:
+        page = 1
+
     # On crée une liste vide de résultat (qui restera vide par défaut
     #   si on n'a pas de mot clé)
     resultats = []
+
     # On fait de même pour le titre de la page
+    titre = "Recherche"
     if motclef:
         resultats = Espece.query.filter(
             Espece.fichier.like("%{}%".format(motclef))
-        ).all()
-        critère = "Résultat pour la recherche `" + motclef + "`"
-    return render_template("form3.html", resultats=resultats, critere=motclef)
+        ).paginate(page=page, per_page=LIEUX_PAR_PAGE)
+        titre = "Résultat pour la recherche `" + motclef + "`"
+
+    return render_template(
+        "chercher2.html",
+        resultats=resultats,
+        titre=titre,
+        keyword=motclef
+    )
+
 
 
 @app.route("/charger")
@@ -134,6 +154,7 @@ def enregistrer_image():
     latin_data = data["latin"]
     description_data = data["description"]
     preoccupation_data = data["preoccupation"]
+    droit_image_data = data["droit_image"]
 
 
     espece = Espece(
@@ -142,7 +163,8 @@ def enregistrer_image():
         nom_latin=latin_data,
         description=description_data,
         regne=regne_data,
-        preoccupation=preoccupation_data
+        preoccupation=preoccupation_data,
+        droit_image=droit_image_data
     )
     db.session.add(espece)
     db.session.commit()
