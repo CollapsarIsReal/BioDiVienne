@@ -1,14 +1,13 @@
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-import datetime
 # Crédits Roy's tutorial : https://roytuts.com/upload-and-display-image-using-python-flask/
 import os
-#import flask_login
 #from app import app
 import urllib.request
 from flask import flash, redirect, url_for
 from werkzeug.utils import secure_filename
-
+#from flask_login import LoginManager
+import flask_login
 UPLOAD_FOLDER = 'static/uploads/'
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -19,7 +18,7 @@ def allowed_file(filename):
 
 
 #INITIALISATION DES VARIABLES
-app = Flask("Application")
+app = Flask("BioDieVienne")
 #On configure la base données
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///BioDivVie2.db'
 # On initie l'extension
@@ -28,8 +27,15 @@ app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 # flask_login
-#import flask_login
+login_manager = flask_login.LoginManager()
+login_manager.init_app(app)
+#login = login_manager(app)
 #login_manager = flask_login.LoginManager()
+#login_manager.init_app(app)
+users = {'foo@bar.tld': {'password': 'secret'}}
+
+#login = LoginManager(app)
+#import flask_login
 #login_manager.init_app(app)
 
 # On crée nos différents modèles
@@ -38,6 +44,13 @@ class Personne(db.Model):
     nom = db.Column(db.Text)
     prenom = db.Column(db.Text)
     utilisateurON = db.Column(db.Integer)
+
+class User(db.Model):
+    user_id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
+    user_nom = db.Column(db.Text, nullable=False)
+    user_login = db.Column(db.String(45), nullable=False, unique=True)
+    user_email = db.Column(db.Text, nullable=False)
+    user_password = db.Column(db.String(100), nullable=False)
 
 class Compte(db.Model):
     id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
@@ -65,6 +78,14 @@ class Espece(db.Model):
     preoccupation = db.Column(db.Text)
     droit_image = db.Column(db.Text)
 
+@login_manager.user_loader
+def user_loader(email):
+    if email not in users:
+        return
+
+    user = User()
+    user.id = email
+    return user
 
 @app.route("/espece/<int:id>")
 def espece(id):
