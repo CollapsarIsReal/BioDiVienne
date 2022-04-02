@@ -54,16 +54,20 @@
 
         </form>
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
-            <a class="nav-link dropdown-toggle" href="#" id="CompteDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Compte
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item nav-link" href="{{url_for('connexion')}}">Connexion</a>
-              <a class="dropdown-item nav-link" href="#">Inscription</a>
-            </div>
-          </li>
-        </ul>
+            <ul class="navbar-nav mr-auto">
+                {% if not current_user.is_authenticated %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for("inscription")}}">Inscription</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for("connexion")}}">Connexion</a>
+                  </li>
+                {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{url_for("deconnexion")}}">Déconnexion ({{current_user.user_nom}})</a>
+                  </li>
+                {% endif %}
+            </ul>
     </nav>
     {% block afternav %}{%endblock%}
       <div class="container">

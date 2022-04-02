@@ -4,6 +4,9 @@
     {{name}}
 {% endblock %}
 {% block corps %}
+utilisateur {{ current_user.name }}
+utilisateur var {{ current_user }}
+utilisateur id {{ current_user.id }}
 	<p>{% if especes %}
         Il y a {{ especes|length }} enregistrées :
         <ul>
