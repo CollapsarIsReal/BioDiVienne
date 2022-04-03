@@ -1,12 +1,14 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import join
+import datetime
 #from app import login
 # Crédits Roy's tutorial : https://roytuts.com/upload-and-display-image-using-python-flask/
 import os
 import urllib.request
 from flask import flash, redirect, url_for
 from werkzeug.utils import secure_filename
-from flask_login import LoginManager, current_user, logout_user
+from flask_login import LoginManager, current_user, logout_user, login_user
 import flask_login
 #from flask_login import logout_user, current_user, login_user #si on reimporte le meme module, cela supprime l'import précédent
 from app21OK import login_manager
@@ -49,21 +51,14 @@ class Personne(db.Model):
     prenom = db.Column(db.Text)
     utilisateurON = db.Column(db.Integer)
 
-class Compte(db.Model):
-    id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
-    mail = db.Column(db.Text, unique=True, nullable=False)
-    pseudo = db.Column(db.Text, unique=True, nullable=False)
-    mdp = db.Column(db.Text, nullable=False)
-    photos = db.relationship("Photo", back_populates="compte")
-
-class Photo(db.Model):
-    id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
-    titre = db.Column(db.Text)
-    datePrise = db.Column(db.Text)
-    compte_id = db.Column(db.Integer, db.ForeignKey('compte.id'))
-    compte = db.relationship("Compte", back_populates="photos")
-    lien_interne = db.Column(db.Text, unique=True, nullable=False)
-    lien_externe = db.Column(db.Text)
+class Authorship(db.Model):
+    __tablename__ = "authorship"
+    authorship_id = db.Column(db.Integer, nullable=True, autoincrement=True, primary_key=True)
+    authorship_espece_id = db.Column(db.Integer, db.ForeignKey('espece.id'))
+    authorship_user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
+    authorship_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    user = db.relationship("User", back_populates="authorships")
+    espece = db.relationship("Espece", back_populates="authorships")
 
 class Espece(db.Model):
     id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
@@ -74,6 +69,7 @@ class Espece(db.Model):
     description = db.Column(db.Text)
     preoccupation = db.Column(db.Text)
     droit_image = db.Column(db.Text)
+    authorships = db.relationship("Authorship", back_populates="espece")
 
 class User(UserMixin, db.Model):
     user_id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
@@ -81,6 +77,7 @@ class User(UserMixin, db.Model):
     user_login = db.Column(db.String(45), nullable=False, unique=True)
     user_email = db.Column(db.Text, nullable=False)
     user_password = db.Column(db.String(100), nullable=False)
+    authorships = db.relationship("Authorship", back_populates="user")
 
     @staticmethod
     def identification(login, motdepasse):
@@ -216,7 +213,16 @@ def deconnexion():
 @app.route("/espece/<int:id>")
 def espece(id):
     unique_espece = Espece.query.get(id)
-    return render_template("espece.html", espece=unique_espece)
+    return render_template("pages/espece.html", espece=unique_espece)
+
+@app.route("/supprimer/<int:id>")
+def supprimer(id):
+    espece_supp_ = db.session.query(Espece).filter(Espece.id == Authorship.authorship_espece_id)\
+        .filter(User.user_id == Authorship.authorship_user_id)\
+        .filter(User.user_id == current_user.user_id)\
+        .filter(Espece.id == id).all()
+    flash(espece)
+    return render_template('pages/moncompte.html', espece_supp=espece_supp_)
 
 
 @app.route("/")
@@ -313,7 +319,20 @@ def enregistrer_image():
         preoccupation=preoccupation_data,
         droit_image=droit_image_data
     )
+
+    # Exécuter une seule fois si possible
+    # On récupère un lieu
+    #place_2 = Espece.query.filter(Espece.nom_latin.like(latin_data)).first()
+    #espece_2 = Espece.query.get(id)
+    # On récupère un utilisateur
+    #flash(current_user.user_id )
+    #user_1 = User.query.get(1)
+    # On crée un lien d'autorité
+    a_ecrit = Authorship(user=current_user, espece=espece)
+    #a_ecrit = Authorship(user=user_1, espece=espece)
+    # On enregistre
     db.session.add(espece)
+    db.session.add(a_ecrit)
     db.session.commit()
     return render_template('charger19.html', filename=filename_data)
 
@@ -328,6 +347,8 @@ def espece_modif(especeid):
     #photo = Photo.query.filter(id=photoid)
     espece = Espece.query.get(especeid)
     return render_template('modifier2.html', espece=espece)
+
+
 
 @app.route('/regne/<int:id>')
 # permet de trier les espèces selon leur règne (animal ou vegetal):
@@ -350,7 +371,31 @@ def regne(id):
 
 @app.route('/apropos')
 def page_apropos():
-    return render_template('apropos.html')
+    return render_template('pages/apropos.html')
+
+@app.route('/moncompte')
+def mon_compte():
+    #current_authorship = Authorship.query.filter(Authorship.authorship_user_id=current_user.user_id).all()
+    #current_espece = Espece.query.all()
+    #current_authorships = Authorship.query.all()
+    #current_authorships = Authorship.query.all()
+    #tests = Espece.query(Espece, Authorship).all()
+    #test2 = db.session.query(Espece, Authorship, User).filter(User.user_id == Authorship.authorship_user_id).filter(User.user_id == '4').all()
+    #test3 = db.session.query(Espece, Authorship, User).filter(User.user_id == Authorship.authorship_user_id).filter(User.user_id == '4').all()
+    #OKtest3 = db.session.query(Authorship).filter(User.user_id == Authorship.authorship_user_id).filter(User.user_id == '4').all()
+    especes_user = db.session.query(Espece).filter(Espece.id == Authorship.authorship_espece_id).filter(User.user_id == Authorship.authorship_user_id).filter(User.user_id == current_user.user_id).all()
+
+    #flash(tests)
+    #flash(current_authorships)
+    #current_authorship_espece = current_authorship_id.query.filter(Authorship.user_id.like("vegetal")).all()
+    #category = Category.query.filter(Category.title.like(category_param_value + "%")).all()
+    #current = User.query.filter(User.user_id.like(int(current_authorship_id))).all()
+    #current_authorships = Authorship.query.filter(Authorship.authorship_user_id.equal("4")).all()
+    #flash(current_espece)
+    #flash(current_authorships)
+    #flash(current_authorship_id)
+    #flash(current)
+    return render_template('pages/moncompte.html', especes=especes_user)
 
 
 if __name__ == "__main__":
