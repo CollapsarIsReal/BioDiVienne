@@ -5,7 +5,9 @@
 
 <title>Python Flask Image Upload and Display Example</title>
 <div class="container">
-
+{% if not current_user.is_authenticated %}
+	Vous devez vous connecter pour enregistrer une espèce.
+	{% else %}
 		<!--Deuxième formulaire : création de l'enregistrement dans la base-->
 	{% if filename %}
 	<div class="row align-items-start">
@@ -77,6 +79,7 @@
 	</p>
 </form>
 	{% endif %}
+		{% endif %} <!-- fin du if current_user-->
 
 
 

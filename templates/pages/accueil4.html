@@ -6,7 +6,7 @@
 {% block corps %}
 utilisateur {{ current_user.name }}
 utilisateur var {{ current_user }}
-utilisateur id {{ current_user.id }}
+utilisateur id {{ current_user.user_id }}
 	<p>{% if especes %}
         Il y a {{ especes|length }} enregistrées :
         <ul>
