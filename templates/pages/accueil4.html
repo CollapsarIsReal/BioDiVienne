@@ -4,15 +4,13 @@
     {{name}}
 {% endblock %}
 {% block corps %}
-utilisateur {{ current_user.name }}
-utilisateur var {{ current_user }}
-utilisateur id {{ current_user.user_id }}
+    <h1>Bienvenue sur BioDiVienne, l'application de recensement du Vivant qui nous entoure</h1>
 	<p>{% if especes %}
-        Il y a {{ especes|length }} enregistrées :
+        Actuellement, il y a {{ especes|length }} espèces enregistrées :
         <ul>
             {% for espece in especes %}
-            <li><a href="{{url_for('espece', id=espece.id)}}">{{espece.nom_vernaculaire}}</a></li>
-            <li><img src=/display/{{espece.fichier}} width="50%"></li>
+            <li><a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a></li>
+            <li><img src=/display/{{espece.espece_fichier}} width="50%"></li>
         </ul>
 
         {% endfor %}

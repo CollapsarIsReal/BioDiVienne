@@ -1,20 +1,13 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import join
 import datetime
-#from app import login
-# Crédits Roy's tutorial : https://roytuts.com/upload-and-display-image-using-python-flask/
+# concernant la sauvgarde des images : Crédits Roy's tutorial : https://roytuts.com/upload-and-display-image-using-python-flask/
 import os
-import urllib.request
 from flask import flash, redirect, url_for
 from werkzeug.utils import secure_filename
-from flask_login import LoginManager, current_user, logout_user, login_user
-import flask_login
-#from flask_login import logout_user, current_user, login_user #si on reimporte le meme module, cela supprime l'import précédent
-from app21OK import login_manager
+from flask_login import LoginManager, current_user, logout_user, login_user, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin
-#import db, login
+
 
 UPLOAD_FOLDER = 'static/uploads/'
 
@@ -27,6 +20,7 @@ def allowed_file(filename):
 chemin_actuel = os.path.dirname(os.path.abspath(__file__))
 templates = os.path.join(chemin_actuel, "templates")
 statics = os.path.join(chemin_actuel, "static")
+
 #INITIALISATION DES VARIABLES
 app = Flask(
     "BioDieVienne",
@@ -41,37 +35,40 @@ login = LoginManager(app)
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-users_ = {'foo@bar.tld': {'password': 'secret'}}
-users = {'elsa.falcoz@mailo.com' : {'zazou': 'patate'}}
+
 
 # On crée nos différents modèles
+''' cette classe ne sert à rien car j'ai déjà user ?
 class Personne(db.Model):
     id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
     nom = db.Column(db.Text)
     prenom = db.Column(db.Text)
-    utilisateurON = db.Column(db.Integer)
+    utilisateurON = db.Column(db.Integer)'''
 
 class Authorship(db.Model):
+    # table qui recoupe l'id du user et l'id de l'espèce qu'il a enregistré
     __tablename__ = "authorship"
     authorship_id = db.Column(db.Integer, nullable=True, autoincrement=True, primary_key=True)
-    authorship_espece_id = db.Column(db.Integer, db.ForeignKey('espece.id'))
+    authorship_espece_id = db.Column(db.Integer, db.ForeignKey('espece.espece_id'))
     authorship_user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
     authorship_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     user = db.relationship("User", back_populates="authorships")
     espece = db.relationship("Espece", back_populates="authorships")
 
 class Espece(db.Model):
-    id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
-    fichier = db.Column(db.Text, unique=True, nullable=False)
-    regne = db.Column(db.Text, nullable=False)
-    nom_vernaculaire = db.Column(db.Text)
-    nom_latin = db.Column(db.Text)
-    description = db.Column(db.Text)
-    preoccupation = db.Column(db.Text)
-    droit_image = db.Column(db.Text)
+    # table qui décrit les espèces
+    espece_id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
+    espece_fichier = db.Column(db.Text, unique=True, nullable=False)
+    espece_regne = db.Column(db.Text, nullable=False)
+    espece_nom_vernaculaire = db.Column(db.Text)
+    espece_nom_latin = db.Column(db.Text)
+    espece_description = db.Column(db.Text)
+    espece_preoccupation = db.Column(db.Text)
+    espece_droit_image = db.Column(db.Text)
     authorships = db.relationship("Authorship", back_populates="espece")
 
 class User(UserMixin, db.Model):
+    # table qui recense les utilisateurs (et donc inscrits) de l'application
     user_id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
     user_nom = db.Column(db.Text, nullable=False)
     user_login = db.Column(db.String(45), nullable=False, unique=True)
@@ -160,7 +157,7 @@ def trouver_utilisateur_via_id(identifiant):
 
 @app.route("/register", methods=["GET", "POST"])
 def inscription():
-    """ Route gérant les inscriptions
+    """ Route gérant les inscriptions des utilisateurs
     """
     # Si on est en POST, cela veut dire que le formulaire a été envoyé
     if request.method == "POST":
@@ -181,7 +178,7 @@ def inscription():
 
 @app.route("/connexion", methods=["POST", "GET"])
 def connexion():
-    """ Route gérant les connexions
+    """ Route gérant les connexions des utilisateurs
     """
     if current_user.is_authenticated is True:
         flash("Vous êtes déjà connecté-e", "info")
@@ -205,37 +202,48 @@ login.login_view = 'connexion'
 
 @app.route("/deconnexion", methods=["POST", "GET"])
 def deconnexion():
+    """ Route gérant la déconnexion des utilisateurs
+        """
     if current_user.is_authenticated is True:
         logout_user()
     flash("Vous êtes déconnecté-e", "info")
     return redirect("/")
 
-@app.route("/espece/<int:id>")
-def espece(id):
-    unique_espece = Espece.query.get(id)
+@app.route("/espece/<int:espece_id>")
+def espece(espece_id):
+    """ Route permettant l'affichage des espèces recensées
+
+        :param espece_id: Identifiant numérique de l'espèce
+        """
+    unique_espece = Espece.query.get(espece_id)
     return render_template("pages/espece.html", espece=unique_espece)
 
-@app.route("/supprimer/<int:id>")
-def espece_supp(id):
-    espece_supp_ = db.session.query(Espece).filter(Espece.id == Authorship.authorship_espece_id)\
+@app.route("/supprimer/<int:espece_id>")
+def espece_supp(espece_id):
+    """ Route permettant l'affichage des espèces recensées
+            :param espece_id: Identifiant numérique de l'espèce
+            """
+    espece_supp_ = db.session.query(Espece).filter(Espece.espece_id == Authorship.authorship_espece_id)\
         .filter(User.user_id == Authorship.authorship_user_id)\
         .filter(User.user_id == current_user.user_id)\
-        .filter(Espece.id == id).all()
+        .filter(Espece.espece_id == espece_id).all()
     flash(espece)
     return render_template('pages/moncompte.html', espece_supp=espece_supp_)
 
 
+@app.route("/accueil")
+def accueil(exemple=None):
+    """ Route permettant l'affichage d'une page accueil"""
+    especes = Espece.query.all()
+    #image_1 = Espece.query.get(id)
+    return render_template("pages/accueil6.html", especes=especes)
+
 @app.route("/")
 def accueil_(exemple=None):
+    """ Route permettant l'affichage d'une page accueil"""
     especes = Espece.query.all()
-    return render_template("pages/accueil4.html", especes=especes)
-
-
-@app.route("/accueil")
-#fonction de lancement de la page d'accueil
-def accueil(exemple=None):
-    especes = Espece.query.all()
-    return render_template("pages/accueil4.html", especes=especes)
+    #image_1 = Espece.query.get(id)
+    return render_template("pages/accueil6.html", especes=especes)
 
 
 @app.route("/recherche")
@@ -260,27 +268,29 @@ def recherche():
     titre = "Recherche"
     if motclef:
         resultats = Espece.query.filter(
-            Espece.fichier.like("%{}%".format(motclef))
+            Espece.espece_fichier.like("%{}%".format(motclef))
         ).paginate(page=page, per_page=ESPECES_PAR_PAGE)
         titre = "Résultat pour la recherche `" + motclef + "`"
 
     return render_template(
-        "chercher2.html",
+        "pages/chercher2.html",
         resultats=resultats,
         titre=titre,
         keyword=motclef
     )
 
 
-
 @app.route("/charger")
-#fonction pour enregistrer une espèce
 def upload_form():
+    """ Route permettant d'enregistrer une espèce
+        """
     return render_template("charger19.html")
 
 
 @app.route("/upload", methods=['POST'])
 def upload_image():
+    """Route permettant d'enregistrer l'image de l'espèce que l'on enregistre
+        """
     if 'file' not in request.files:
         flash('No file part')
         return redirect(request.url)
@@ -300,6 +310,7 @@ def upload_image():
 
 @app.route("/enregistrer", methods=['POST'])
 def enregistrer_image():
+    """Route permettant d'enregistrer l'espèce dans la base de donnée"""
     data = request.form #c'est un tableau associatif (clé-valeur) appelé collection en python, ou dictionnaire de données
     filename_data = data["fichier"]
     regne_data = data["regne"]
@@ -311,52 +322,45 @@ def enregistrer_image():
 
 
     espece = Espece(
-        fichier=filename_data,
-        nom_vernaculaire=vernaculaire_data,
-        nom_latin=latin_data,
-        description=description_data,
-        regne=regne_data,
-        preoccupation=preoccupation_data,
-        droit_image=droit_image_data
+        espece_fichier=filename_data,
+        espece_nom_vernaculaire=vernaculaire_data,
+        espece_nom_latin=latin_data,
+        espece_description=description_data,
+        espece_regne=regne_data,
+        espece_preoccupation=preoccupation_data,
+        espece_droit_image=droit_image_data
     )
-
-    # Exécuter une seule fois si possible
-    # On récupère un lieu
-    #place_2 = Espece.query.filter(Espece.nom_latin.like(latin_data)).first()
-    #espece_2 = Espece.query.get(id)
-    # On récupère un utilisateur
-    #flash(current_user.user_id )
-    #user_1 = User.query.get(1)
-    # On crée un lien d'autorité
-    a_ecrit = Authorship(user=current_user, espece=espece)
-    #a_ecrit = Authorship(user=user_1, espece=espece)
-    # On enregistre
+    # On enregistre en premier dans la table authorship la lien espèce/user
+    a_cree = Authorship(user=current_user, espece=espece)
+    # Puis enregistre l'espèce
     db.session.add(espece)
-    db.session.add(a_ecrit)
+    db.session.add(a_cree)
     db.session.commit()
     return render_template('charger19.html', filename=filename_data)
 
 
 @app.route('/display/<filename>')
-# affiche l'image depuis le repertoire static
 def display_image(filename):
+    """ Route permettant d'afficher l'image d'une espèce
+    depuis le repertoire static """
     return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
 
-@app.route('/regne/<int:id>')
-# permet de trier les espèces selon leur règne (animal ou vegetal):
-# id=0 renvoie toutes les espèces
-# id=1 renvoie les espèces du règne animal
-# id=1 renvoie les espèces du règne vegetal
-
-def regne(id):
+@app.route('/regne/<int:espece_id>')
+def regne(espece_id):
+    """ Route permettant l'affichage des espèces selon leur règne:
+    :param espece_id: Identifiant numérique de l'espèce:
+        # id=0 renvoie toutes les espèces peu importe leur règne
+        # id=1 renvoie les espèces du règne animal
+        # id=2 renvoie les espèces du règne vegetal
+        """
     especes = []
-    if id == 0:
+    if espece_id == 0:
         especes = Espece.query.all()
-    elif id == 1:
-        especes = Espece.query.filter(Espece.regne.like("animal")).all()
-    elif id == 2:
-        especes = Espece.query.filter(Espece.regne.like("vegetal")).all()
+    elif espece_id == 1:
+        especes = Espece.query.filter(Espece.espece_regne.like("animal")).all()
+    elif espece_id == 2:
+        especes = Espece.query.filter(Espece.espece_regne.like("vegetal")).all()
     else:
         especes = []
     return render_template('regne.html', especes=especes)
@@ -364,30 +368,18 @@ def regne(id):
 
 @app.route('/apropos')
 def page_apropos():
+    """ Route permettant d'accéder à la page "à propos" """
     return render_template('pages/apropos.html')
 
 @app.route('/moncompte')
 def mon_compte():
-    #current_authorship = Authorship.query.filter(Authorship.authorship_user_id=current_user.user_id).all()
-    #current_espece = Espece.query.all()
-    #current_authorships = Authorship.query.all()
-    #current_authorships = Authorship.query.all()
-    #tests = Espece.query(Espece, Authorship).all()
-    #test2 = db.session.query(Espece, Authorship, User).filter(User.user_id == Authorship.authorship_user_id).filter(User.user_id == '4').all()
-    #test3 = db.session.query(Espece, Authorship, User).filter(User.user_id == Authorship.authorship_user_id).filter(User.user_id == '4').all()
-    #OKtest3 = db.session.query(Authorship).filter(User.user_id == Authorship.authorship_user_id).filter(User.user_id == '4').all()
-    especes_user = db.session.query(Espece).filter(Espece.id == Authorship.authorship_espece_id).filter(User.user_id == Authorship.authorship_user_id).filter(User.user_id == current_user.user_id).all()
-
-    #flash(tests)
-    #flash(current_authorships)
-    #current_authorship_espece = current_authorship_id.query.filter(Authorship.user_id.like("vegetal")).all()
-    #category = Category.query.filter(Category.title.like(category_param_value + "%")).all()
-    #current = User.query.filter(User.user_id.like(int(current_authorship_id))).all()
-    #current_authorships = Authorship.query.filter(Authorship.authorship_user_id.equal("4")).all()
-    #flash(current_espece)
-    #flash(current_authorships)
-    #flash(current_authorship_id)
-    #flash(current)
+    """ Route permettant d'accéder à la liste de toutes les espèces enregistrées
+        selon le compte utilisé
+        """
+    especes_user = db.session.query(Espece)\
+        .filter(Espece.espece_id == Authorship.authorship_espece_id)\
+        .filter(User.user_id == Authorship.authorship_user_id)\
+        .filter(User.user_id == current_user.user_id).all()
     return render_template('pages/moncompte.html', especes=especes_user)
 
 
@@ -395,8 +387,3 @@ if __name__ == "__main__":
     app.run(debug=True)
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-#OBJECTIFS DU 15 MARS 2022:
-# - terminer de mettre les champs pour toutes les colonnes de la base dans upload
-# - réaranger la redirection après les résultats
-# - bien déterminer ce que je veux faire avec mon appli (photo ou pas ?)

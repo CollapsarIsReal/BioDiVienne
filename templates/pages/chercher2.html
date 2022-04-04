@@ -11,7 +11,7 @@
         <p>Il y a {{resultats.total}} lieux qui répondent à votre requête :</p>
         <ul>
             {% for espece in resultats.items %}
-                <li><a href="{{url_for('espece', id=espece.id)}}">{{espece.nom_vernaculaire}}</a></li>
+                <li><a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a></li>
             {% endfor %}
         </ul>
     <nav aria-label="research-pagination">
