@@ -1,0 +1,25 @@
+{% extends "conteneur3.html" %}
+
+{% block titre %}
+    {{name}}
+{% endblock %}
+{% block corps %}
+</br>
+<h1 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Bienvenue sur BioDiVienne, l'application de recensement du Vivant qui nous entoure</h1></br>
+	{% if especes %}
+        {% for espece in especes %}
+        <div class="container">
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+    <div class="col">
+      <div>
+          <img src="/display/{{espece.espece_fichier}}"
+               class="p-3 border bg-light img-responsive"
+               width="200" height="auto"</img>
+               <a href="{{url_for('espece', espece_id=espece.espece_id)}}"/>{{espece.espece_nom_vernaculaire}}</a>
+          </div>
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+
+{% endblock %}

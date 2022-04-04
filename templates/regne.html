@@ -2,7 +2,7 @@
 
 {% block titre %}
     {% for espece in especes %}
-        Espece : {{espece.nom_vernaculaire}}
+        Espece : {{espece.espece_nom_vernaculaire}}
     {% endfor %}
 {% endblock %}
 
@@ -14,8 +14,8 @@
     </div></p>
     {% elif especes|length == 1 %}
             <p>Il y a une espèce enregistrée :</p>
-            <h1>{{espece.nom_vernaculaire}}</h1>
-            <h2>{{espece.nom_latin}}</h2>
+            <h1>{{espece.espece_nom_vernaculaire}}</h1>
+            <h2>{{espece.espece_nom_latin}}</h2>
             <dl>
                 <dt>Préocupation</dt><dd>{{espece.preocupation}}</dd>
                 <dt>Description</dt><dd>{{espece.description}}</dd>
@@ -25,7 +25,7 @@
     {% endif %}
     <ul>
         {% for espece in especes %}
-                        <li><a href="{{url_for('espece', id=espece.id)}}">{{espece.nom_vernaculaire}}</a></li>
+                        <li><a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a></li>
             {% endfor %}
 
         </ul>

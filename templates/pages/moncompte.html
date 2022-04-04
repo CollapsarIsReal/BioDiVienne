@@ -21,20 +21,20 @@ Mes espèces enregistrées :
     </div></p>
     {% elif especes|length == 1 %}
             <p>Il y a une espèce enregistrée :</p>
-            <h1>{{espece.nom_vernaculaire}}</h1>
-            <h2>{{espece.nom_latin}}</h2>
+            <h1>{{espece.espece_nom_vernaculaire}}</h1>
+            <h2>{{espece.espece_nom_latin}}</h2>
             <dl>
-                <dt>Préocupation</dt><dd>{{espece.preocupation}}</dd>
-                <dt>Description</dt><dd>{{espece.description}}</dd>
+                <dt>Préocupation</dt><dd>{{espece.espece_preocupation}}</dd>
+                <dt>Description</dt><dd>{{espece.espece_description}}</dd>
             </dl>
     {% else %}
         <p>Il y a {{ especes|length }} enregistrées :</p>
     {% endif %}
     <ul>
         {% for espece in especes %}
-                        <li><a href="{{url_for('espece', id=espece.id)}}">{{espece.nom_vernaculaire}}</a>
+                        <li><a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a>
                             <button type="button" class="btn btn-outline-warning" href="#">modifier</button>
-                            <a type="button" class="btn btn-outline-danger" href="{{url_for('espece_supp', id=espece.id)}}">supprimer</a>
+                            <a type="button" class="btn btn-outline-danger" href="{{url_for('espece_supp', espece_id=espece.espece_id)}}">supprimer</a>
                         </li>
             {% endfor %}
 

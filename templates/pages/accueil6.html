@@ -1,0 +1,16 @@
+{% extends "conteneur3.html" %}
+
+{% block titre %}
+    {{name}}
+{% endblock %}
+{% block corps %}
+</br>
+<h1 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Bienvenue sur BioDiVienne, l'application de recensement du Vivant qui nous entoure</h1></br>
+<p>Actuellement, il y a {{ especes|length }} espèces enregistrées. <input type="button" href="#" value="Explorez-les !"/></p>
+<div>
+    <img src="static/uploads/Myosotis.jpg" class="img-thumbnail rounded float-start" alt="...">
+    <img src="static/uploads/Myosotis.jpg" class="img-thumbnail rounded float-end" alt="...">
+</div>
+
+
+{% endblock %}
