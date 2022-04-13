@@ -33,8 +33,8 @@ Mes espèces enregistrées :
     <ul>
         {% for espece in especes %}
                         <li><a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a>
-                            <button type="button" class="btn btn-outline-warning" href="#">modifier</button>
-                            <a type="button" class="btn btn-outline-danger" href="{{url_for('espece_supp', espece_id=espece.espece_id)}}">supprimer</a>
+                            <button type="button" class="btn btn-outline-warning btn-sm" href="#">modifier</button>
+                            <a type="button" class="btn btn-outline-danger btn-sm" href="{{url_for('espece_supp', espece_id=espece.espece_id)}}">supprimer</a>
                         </li>
             {% endfor %}
 

@@ -1,9 +1,27 @@
 <!DOCTYPE html>
 {% extends "conteneur3.html" %}
 {% block corps %}
+
+<style>
+    .fonctionnement {
+    background-color: #97cba9;
+    border: thick double #3a7563;
+    padding : 10px;
+    margin : 10px;
+    }
+
+    .presentation {
+    background-color: #e3f6f5;
+    border: thick double #38598b;
+    padding : 10px;
+    margin : 10px;
+    }
+</style>
+
 <html lang="fr">
 <br/>
 <br/>
+<div class="presentation">
 <h2>A la découverte du pourtour Confolentais</h2>
     <figure>
         <img src="{{url_for('static', filename='images/carte.png')}}" class="img-fluid" alt="..."/>
@@ -12,8 +30,49 @@
 <div>
     <p>Cette application est un travail effectué dans le cadre de la validation du Master TNAH de l'Ecole nationale des chartes.
     Souhaitant mettre à profit mes compétences, j'ai eu la volonté de créer un outil pour les curieux de la biodiversité
-    de la région, et également à destination des collèges/lycées des environs.
-    Son utilisation est simple : pouvoir recenser les espèces végétales et animales.</p>
+    de la région de la Vienne, mais l'outil fonctionne également pour toutes les autres (#Nossibellesregions!) !
+    Son but est simple : permettre à qui le souhaite de pouvoir recenser les espèces végétales et animales qui l'entourent.</p>
+</div>
+    </div>
+<div class="fonctionnement">
+    <h2><i>Comment ça marche ?</i></h2>
+    <p>Cet outil comporte plusieurs onglets de navigation détaillés ci-dessous : </p>
+    <ul type="square">
+        <li>Un onglet <b>Accueil</b> pour revenir à l'accueil du site</li>
+        <li>Un onglet déroulant <b>Espèces</b> pour accéder :
+            <ul>
+                <li>au formulaire d'enregistrement d'une espèce (<b>Enregistrer une espèce</b>)</li>
+                <li>consulter les epèces selon leur règne (<b>vegetal</b>, <b>animal</b> ou bien les <b>deux confondus</b>)</li>
+            </ul></li>
+        <li>Un onglet <b>Recherche</b> qui permet de chercher un espèce partiulière parmi toutes les entrées des <i>noms vernaculaires</i></li>
+        <li>Un onglet <b>Inscription</b> afin de se créer un compte, avec plusieurs champs à remplir:
+            <ul>
+                <li>Login <i>(exemple: patate)</i></li>
+                <li>Nom (A ENLEVER)</li>
+                <li>Email <i>(exemple: patate@feculent.eu)</i></li>
+                <li>Password (maximum 12 caractères)</li>
+            </ul>
+        <li>Un onglet <b>Connexion</b> pour pouvoir se connecter en entrant :</li>
+            <ul>
+                <li>son Login</li>
+                <li>son Password</li>
+            </ul>
+    </ul>
+    <p>Une fois connecté, vous aurez accés à deux onglets supplémentaires :</p>
+    <ul type="square">
+        <li><b>Mon Compte</b> qui recense toutes vos espèces enregistrées.
+            C'est depuis cette page qui vous pourrez <i>modifier</i> et <i>supprimer</i> les espèces souhaitées.</li>
+        <li><b>Déconnexion</b> pour se déconnecter (sisi!)</li>
+    </ul>
+</div>
+<div class="enregistrer">
+    <h2><i>Comment enregistrer une espèce ?</i></h2>
+    <p>Pour cela vous devez d'abord vous rendre dans la page d'enregistrement via l'onglet <b>Espèce</b> puis <b>Création d'une espèce</b></p>
+        <ul>
+            <li>son nom vernaculaire (usuel)</li>
+            <li>sa dénomination scientifique en latin <i>(une seule espèce par nom latin est autorisée)</i></li>
+</ul>
+    </p>
 </div>
 {% endblock %}
 </html>
