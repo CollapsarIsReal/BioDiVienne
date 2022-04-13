@@ -25,7 +25,8 @@
     {% endif %}
     <ul>
         {% for espece in especes %}
-                        <img src=""<li><a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a></li>
+        <p><li><img src=/display/{{espece.espece_fichier}} width="30px" height="auto"> -
+        <a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a></li></p>
             {% endfor %}
 
         </ul>

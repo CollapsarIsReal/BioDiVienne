@@ -6,7 +6,7 @@
 <title>Python Flask Image Upload and Display Example</title>
 <div class="container">
 {% if not current_user.is_authenticated %}
-	Vous devez vous connecter pour enregistrer une espèce.
+	<div class="alert alert-info" role="alert">Vous devez <a href="{{url_for('connexion')}}">vous connecter</a> pour enregistrer une espèce</div>
 	{% else %}
 		<!--Deuxième formulaire : création de l'enregistrement dans la base-->
 	{% if filename %}
