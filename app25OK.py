@@ -223,13 +223,41 @@ def espece_supp(espece_id):
     """ Route permettant l'affichage des espèces recensées
             :param espece_id: Identifiant numérique de l'espèce
             """
-    espece_supp_ = db.session.query(Espece).filter(Espece.espece_id == Authorship.authorship_espece_id)\
-        .filter(User.user_id == Authorship.authorship_user_id)\
-        .filter(User.user_id == current_user.user_id)\
-        .filter(Espece.espece_id == espece_id).all()
-    flash(espece)
-    return render_template('pages/moncompte.html', espece_supp=espece_supp_)
+    return_code = 0
+    count_id = db.session.query(Authorship).filter(Authorship.authorship_espece_id == espece_id).filter(Authorship.authorship_user_id == current_user.user_id).count()
 
+    if count_id == 1: # l'utilisateur est autorisé à supprimer l'instance
+        return_code = db.session.query(Espece).filter(Espece.espece_id == espece_id).delete()
+        # test: return_code = 0
+        if return_code != 0: # si pas d'erreur dans la suppression d'espece
+            db.session.query(Authorship).filter(Authorship.authorship_espece_id == espece_id).delete()
+            db.session.commit()
+    return render_template('pages/moncompte.html', action="suppr", statut=return_code)
+
+@app.route("/modifier/<int:espece_id>")
+def espece_modif(espece_id):
+    unique_espece = Espece.query.get(espece_id)
+
+    return render_template('pages/modifier.html', espece=unique_espece)
+
+'''@app.route("/modifier_post", method=["POST"])
+def modifier_post:
+
+    if request.method == "POST":
+        statut, donnees = User.creer(
+            login=request.form.get("login", None),
+            email=request.form.get("email", None),
+            nom=request.form.get("nom", None),
+            motdepasse=request.form.get("motdepasse", None)
+        )
+        if statut is True:
+            flash("Enregistrement effectué. Identifiez-vous maintenant", "success")
+            return redirect("/")
+        else:
+            flash("Les erreurs suivantes ont été rencontrées : " + ",".join(donnees), "error")
+            return render_template("pages/inscription.html")
+    else:
+        return render_template("pages/inscription.html")'''
 
 @app.route("/accueil")
 def accueil(exemple=None):
@@ -380,6 +408,7 @@ def mon_compte():
         .filter(Espece.espece_id == Authorship.authorship_espece_id)\
         .filter(User.user_id == Authorship.authorship_user_id)\
         .filter(User.user_id == current_user.user_id).all()
+    flash(especes_user)
     return render_template('pages/moncompte.html', especes=especes_user)
 
 

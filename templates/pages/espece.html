@@ -1,16 +1,19 @@
 {% extends "conteneur3.html" %}
 
+{% block titre %}
+    {{name}}
+{% endblock %}
 {% block corps %}
     {% if espece %}
 <div>
 <div class="row align-items-start">
-		<div class="col">
+    <div class="col">
             <img src=/display/{{espece.espece_fichier}} class="img-thumbnail img-responsive" href="{{espece.espece_droit_image}}"> <!--faire fonctionner le lien image-->
-		</div>
-		<div class="col">
-			<h2>{{espece.espece_nom_vernaculaire}}</h2>
+    </div>
+    <div class="col">
+      <h1>{{espece.espece_nom_vernaculaire}}</h1>
             <h4><i>{{espece.espece_nom_latin}}</i></h4>
-			<div class="mb-3">
+      <div class="mb-3">
                 <label class="form-label">{{espece.espece_description}}</label>
               </div>
             <div class="mb-3">
