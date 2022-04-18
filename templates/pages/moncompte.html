@@ -10,38 +10,26 @@
     <title>Title</title>
 </head>
 <body>
-    {% if espece_supp %}
-    <div class="alert alert-success" role="alert">L'espèce a bien été supprimée.</div>
-    {% endif %}
-Mes espèces enregistrées :
-    {% if especes|length == 0 %}
-<p>
-    <div class="alert alert-warning" role="alert">
-      Il n'y a pas d'espèces recensée.
-    </div></p>
-    {% elif especes|length == 1 %}
-            <p>Il y a une espèce enregistrée :</p>
-            <h1>{{espece.espece_nom_vernaculaire}}</h1>
-            <h2>{{espece.espece_nom_latin}}</h2>
-            <dl>
-                <dt>Préocupation</dt><dd>{{espece.espece_preocupation}}</dd>
-                <dt>Description</dt><dd>{{espece.espece_description}}</dd>
-            </dl>
+    {% if action == "suppr" %}
+        {% if statut == 0 %}
+        <div class="alert alert-warning" role="alert">Erreur suppression. Veuillez réessayer.</div>
+        {% else %}
+        <div class="alert alert-success" role="alert">L'espèce a bien été supprimée.</div>
+        {% endif %}
     {% else %}
+    Mes espèces enregistrées :
+        {% if especes|length == 0 %}
+        Il n'y a pas d'espèces.
+        {% elif especes|length == 1 %}
+        <p>Il y a une espèce enregistrée :</p>
+        {% else %}
         <p>Il y a {{ especes|length }} enregistrées :</p>
-    {% endif %}
-    <ul>
+        {% endif %}
         {% for espece in especes %}
                         <li><a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a>
-                            <button type="button" class="btn btn-outline-warning btn-sm" href="#">modifier</button>
+                            <a type="button" class="btn btn-outline-warning btn-sm" href="{{url_for('espece_modif', espece_id=espece.espece_id)}}">modifier</a>
                             <a type="button" class="btn btn-outline-danger btn-sm" href="{{url_for('espece_supp', espece_id=espece.espece_id)}}">supprimer</a>
                         </li>
             {% endfor %}
-
-        </ul>
-        <p>
-        <a href="{{url_for('accueil')}}">Retour à l'accueil</a>
-        </p>
-</body>
-</html>
+    {% endif %}
 {% endblock %}

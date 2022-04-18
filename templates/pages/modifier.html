@@ -1,23 +1,25 @@
-<!doctype html>
-<html>
-<form>
 {% extends "conteneur3.html" %}
+{% block titre %}
+    {{name}}
+{% endblock %}
 {% block corps %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
 
-
-{% if filename %}
-	<h2>Hello</h2>
-	<div>
-		<img src="{{
-		url_for('display_image', filename=filename) }}", class="responsive">
+	<h2>Page de modifications</h2>
+	<form class="form" method="POST" action="/enregistrer" id="enreg">
+		 <input type="hidden" id="espece_id" name="espece_id" value="{{espece.espece_id}}">
+	<div class="row align-items-start">
+	<div class="col">
+		<img src="/display/{{espece.espece_fichier}}" class="img-thumbnail img-responsive"/>
 	</div>
-
-{% endif %}
-
-<!--Deuxième formulaire : création de l'enregistrement dans la base-->
-{% if filename %}
-		<div>
-			Nom vernaculaire : <input class="font-italic" type="text" name="vernaculaire"><br/>
+		<div class="col">
+			Nom vernaculaire : <input class="font-italic" type="text" name="vernaculaire" value="{{espece.espece_nom_vernaculaire}}"><br/>
 			Nom latin : <input class="font-italic" type="text" name="latin"><br/>
 			Description : <input class="font-italic" type="text" name="description"><br/>
 			Décret juridique : <input type="text" name="décret juridique"><br/>
@@ -40,9 +42,10 @@
 		</div>
     <p>
 		<input type="text" name="fichier" value={{filename}}>
-		<input type="submit" value="Enregistrer">
+		<input type="submit" value="Modifier">
 	</p>
 </form>
-{% endif %}
-{% endblock %}
+	</div>
+</body>
 </html>
+{% endblock %}

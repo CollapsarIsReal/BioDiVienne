@@ -1,0 +1,20 @@
+/* style.css */
+body {
+  background-color: lightblue;
+}
+
+h1 {
+  color: red;
+  margin-left: 20px;
+}
+
+
+.hero  {
+    background-position: center center;
+    padding:10vh;
+    background-image: url({{url_for('static', filename='images/font.jpg')}});
+ }
+
+.container {
+background-image: none;
+}
