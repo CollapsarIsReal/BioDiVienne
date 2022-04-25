@@ -240,24 +240,40 @@ def espece_modif(espece_id):
 
     return render_template('pages/modifier.html', espece=unique_espece)
 
-'''@app.route("/modifier_post", method=["POST"])
-def modifier_post:
+@app.route("/modifier_post", methods=['POST'])
+def modifier_post():
+    return_code = 0
 
     if request.method == "POST":
-        statut, donnees = User.creer(
-            login=request.form.get("login", None),
-            email=request.form.get("email", None),
-            nom=request.form.get("nom", None),
-            motdepasse=request.form.get("motdepasse", None)
-        )
-        if statut is True:
-            flash("Enregistrement effectué. Identifiez-vous maintenant", "success")
-            return redirect("/")
-        else:
-            flash("Les erreurs suivantes ont été rencontrées : " + ",".join(donnees), "error")
-            return render_template("pages/inscription.html")
-    else:
-        return render_template("pages/inscription.html")'''
+        """Route permettant de modifier l'espèce dans la base de données"""
+        data = request.form  # c'est un tableau associatif (clé-valeur) appelé collection en python, ou dictionnaire de données
+        espece_id_data = data["espece_id"]
+        vernaculaire_data = data["vernaculaire"]
+        latin_data = data["latin"]
+        description_data = data["description"]
+        preoccupation_data = data["preoccupation"]
+        #droit_image_data = data["droit_image"]
+        regne_data = data["regne"]
+
+        # vérification de l'id de l'utilisateur avant modification
+        count_id = db.session.query(Authorship).filter(Authorship.authorship_espece_id == espece_id_data).filter(
+            Authorship.authorship_user_id == current_user.user_id).count()
+
+        if count_id == 1:  # l'utilisateur est autorisé à modifier l'instance
+
+            unique_espece = Espece.query.get(espece_id_data) # récupération de l'instance de l'espèce de la base
+
+            if unique_espece: # pas d'erreur, récupération OK
+                unique_espece.espece_nom_vernaculaire = vernaculaire_data
+                unique_espece.espece_nom_latin = latin_data
+                unique_espece.espece_description = description_data
+                unique_espece.espece_regne = regne_data
+                unique_espece.espece_preoccupation = preoccupation_data
+
+            # Puis modification de l'espèce
+                db.session.commit()
+                return_code = 1
+    return render_template('pages/moncompte.html', action="modif", statut=return_code)
 
 @app.route("/accueil")
 def accueil(exemple=None):
