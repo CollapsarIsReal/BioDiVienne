@@ -16,6 +16,12 @@
         {% else %}
         <div class="alert alert-success" role="alert">L'espèce a bien été supprimée.</div>
         {% endif %}
+    {% elif action == "modif" %}
+        {% if statut == 0 %}
+        <div class="alert alert-warning" role="alert">Erreur modification. Veuillez réessayer.</div>
+        {% else %}
+        <div class="alert alert-success" role="alert">L'espèce a bien été modifiée.</div>
+        {% endif %}
     {% else %}
     Mes espèces enregistrées :
         {% if especes|length == 0 %}

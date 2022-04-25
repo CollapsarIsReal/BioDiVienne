@@ -12,40 +12,53 @@
 <body>
 
 	<h2>Page de modifications</h2>
-	<form class="form" method="POST" action="/enregistrer" id="enreg">
-		 <input type="hidden" id="espece_id" name="espece_id" value="{{espece.espece_id}}">
+	{% if not espece %}
+		<div class="alert alert-warning" role="alert">Erreur: espèce non trouvée.</div>
+	{% else %}
 	<div class="row align-items-start">
-	<div class="col">
-		<img src="/display/{{espece.espece_fichier}}" class="img-thumbnail img-responsive"/>
-	</div>
 		<div class="col">
-			Nom vernaculaire : <input class="font-italic" type="text" name="vernaculaire" value="{{espece.espece_nom_vernaculaire}}"><br/>
-			Nom latin : <input class="font-italic" type="text" name="latin"><br/>
-			Description : <input class="font-italic" type="text" name="description"><br/>
-			Décret juridique : <input type="text" name="décret juridique"><br/>
-			Statut jurique :
-			<select class="form-select" aria-label="Default select example">
-			  <option value="1">Non connue</option>
-			  <option value="2">P</option>
-			  <option value="3">p2</option>
-				<option value="3">p3</option>
-				<option value="3">p4B</option>
-				<option value="3">p5</option>
-				<option value="3">p5</option>
-				<option value="3">C</option>
-				<option value="3">C1</option>
-				<option value="3">C2</option>
-				<option value="3">C3</option>
-				<option value="3">N</option>
-				<option value="3">(m)</option>
-			</select>
+			<img src="/display/{{espece.espece_fichier}}" class="img-thumbnail img-responsive"/>
 		</div>
-    <p>
-		<input type="text" name="fichier" value={{filename}}>
+		<div class="col">
+			<h2><i>Caractéristiques de l'espèce :</i></h2>
+	<form class="form" method="POST" action="/modifier_post" id="modif_post">
+			<div class="mb-3">
+                <label class="form-label">Nom vernaculaire</label>
+                <input type="text" class="form-control" id="vernaculaire" name="vernaculaire" value="{{espece.espece_nom_vernaculaire}}">
+              </div>
+			<div class="mb-3">
+                <label class="form-label">Nom latin</label>
+                <input type="text" class="form-control" id="latin" name="latin">
+              </div>
+			<div class="mb-3">
+                <label class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="description">
+              </div>
+			<div class="mb-3">
+                <label class="form-label">Droit à l'image</label>
+                <input type="text" class="form-control" id="droit_image" name="droit_image">
+              </div>
+			<label for="regne">Règne</label>
+      <select name="regne" id="regne">
+        <option value="animal">Animal</option>
+        <option value="vegetal">Vegetal</option>
+      </select></br>
+			<label for="preoc">Preoccupation</label>
+      <select name="preoccupation" id="preoc">
+		  <option value="LC">Inconnue</option>
+        <option value="LC">LC</option>
+		  <option value="NT">NT</option>
+		  <option value="VU">VU</option>
+		  <option value="EN">EN</option>
+		  <option value="CR">CR</option>
+		  <option value="RE">RE</option>
+      </select></br>
+		<input type="hidden" value="{{espece.espece_id}}" name="espece_id">
 		<input type="submit" value="Modifier">
-	</p>
-</form>
+	</form>
+		</div>
 	</div>
+{% endif %}
 </body>
 </html>
 {% endblock %}
