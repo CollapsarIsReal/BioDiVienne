@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import datetime
-# concernant la sauvgarde des images : Crédits Roy's tutorial : https://roytuts.com/upload-and-display-image-using-python-flask/
+# concernant la sauvegarde des images : Crédits Roy's tutorial : https://roytuts.com/upload-and-display-image-using-python-flask/
 import os
 from flask import flash, redirect, url_for
 from werkzeug.utils import secure_filename
@@ -23,7 +23,7 @@ statics = os.path.join(chemin_actuel, "static")
 
 #INITIALISATION DES VARIABLES
 app = Flask(
-    "BioDieVienne",
+    "BioDiVienne",
     #template_folder=templates,
     #static_folder=statics
 )
@@ -38,12 +38,6 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
 # On crée nos différents modèles
-''' cette classe ne sert à rien car j'ai déjà user ?
-class Personne(db.Model):
-    id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
-    nom = db.Column(db.Text)
-    prenom = db.Column(db.Text)
-    utilisateurON = db.Column(db.Integer)'''
 
 class Authorship(db.Model):
     # table qui recoupe l'id du user et l'id de l'espèce qu'il a enregistré

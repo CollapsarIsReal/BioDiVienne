@@ -1,16 +1,12 @@
 {% extends "conteneur3.html" %}
-
-{% block titre %}
-    {{name}}
-{% endblock %}
 {% block corps %}
-</br>
-<h1 xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">Bienvenue sur BioDiVienne !</h1></br>
-<p>Actuellement, il y a {{ especes|length }} espèces enregistrées.</p> Pour les consulter, <a type="buton" href="{{url_for('regne', espece_id=0)}}" value="cliquez-ici">cliquez-ici</a>
 <div>
-    <img src="static/uploads/Myosotis.jpg" class="img-thumbnail rounded float-start" alt="...">
-    <img src="static/uploads/Myosotis.jpg" class="img-thumbnail rounded float-end" alt="...">
+    <div>
+        <h1>Bienvenue sur BioDiVienne !</h1>
+        <p>Actuellement, il y a {{ especes|length }} espèces enregistrées.</p> Pour les consulter, <a type="buton" href="{{url_for('regne', espece_id=0)}}">cliquez-ici</a>
+    </div>
+    <div>
+
+    </div>
 </div>
-
-
 {% endblock %}
