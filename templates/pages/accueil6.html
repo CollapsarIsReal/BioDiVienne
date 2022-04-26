@@ -1,12 +1,8 @@
 {% extends "conteneur3.html" %}
 {% block corps %}
-<div>
-    <div>
+<div class="row align-items-start">
+    <div class="col">
         <h1>Bienvenue sur BioDiVienne !</h1>
         <p>Actuellement, il y a {{ especes|length }} espèces enregistrées.</p> Pour les consulter, <a type="buton" href="{{url_for('regne', espece_id=0)}}">cliquez-ici</a>
     </div>
-    <div>
-
-    </div>
-</div>
-{% endblock %}
+        {% endblock %}

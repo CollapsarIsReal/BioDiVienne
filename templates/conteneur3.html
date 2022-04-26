@@ -3,12 +3,13 @@
 <head>
     <head>
     <meta charset="UTF-8">
-    <title>BiodiVienne {% block titre %}{% endblock %}</title>
+    <title>BioDiVienne</title>
     {% include "partials/css.html" %}
     {% include "partials/metadata.html" %}
         <link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
+    <!-- section de la navbar -->
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #8bbfca;">
         <a class="navbar-brand" href="{{url_for('accueil')}}"> <img class="d-inline-block" src="{{url_for('static', filename='images/pavot.png')}}" width="60" height="60" class="d-inline-block align-text-top"/>BioDiVienne</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -54,27 +55,11 @@
                 {% endif %}
             </ul>
     </nav>
-    
-      <div class="container">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-          {% if messages %}
-          <div class="row">
-              <div class="col">
-                {% for category, message in messages %}
-                  <div class="alert alert-{{category}}" role="alert">{{ message }}</div>
-                {% endfor %}
-              </div>
-          </div>
-      </div>
-          {% endif %}
-        {% endwith %}
+    <!-- contenu -->
     <div class="container">
-        <div class="row">
-            <div class="col">
-            {% block corps %}{% endblock %}
-            </div>
-        </div>
+    {% block corps %}{% endblock %}
     </div>
+    <!-- pied de page -->
 <div class="container">
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
     <p class="col-md-4 mb-0 text-muted">&copy; 2022 E.Falcoz</p>
