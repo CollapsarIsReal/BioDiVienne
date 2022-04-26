@@ -13,13 +13,7 @@
       Il n'y a pas d'espèces recensée.
     </div></p>
     {% elif especes|length == 1 %}
-            <p>Il y a une espèce enregistrée :</p>
-            <h1>{{espece.espece_nom_vernaculaire}}</h1>
-            <h2>{{espece.espece_nom_latin}}</h2>
-            <dl>
-                <dt>Préocupation</dt><dd>{{espece.preocupation}}</dd>
-                <dt>Description</dt><dd>{{espece.description}}</dd>
-            </dl>
+        <p>Il y a une espèce enregistrée :</p>
     {% else %}
         <p>Il y a {{ especes|length }} espèces enregistrées au total :</p>
     {% endif %}
