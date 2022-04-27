@@ -1,8 +1,66 @@
 {% extends "conteneur3.html" %}
 {% block corps %}
-<div class="row align-items-start">
-    <div class="col">
+<style>
+    body {
+  background-color: #B9D9EB;
+    background-image: url("/static/uploads/martin_pecheur.jpeg");
+    background-position-x: 10ch;
+    background-position-y: 2ch;
+}
+
+    h1 {
+      color: teal;
+      margin-left: 20px;
+      margin: 20px;
+      border-left: solid;
+      padding: 5px;
+    }
+
+    p {
+    text-align: justify;
+    font-size: 19px;
+    width: 60%;
+    }
+
+    .initiale {
+        font-size: larger;
+        font-weight: bold;
+        color: #24527a;
+        border-left: solid 1px;
+        border-top: solid 1px;
+        padding: 2px;
+        }
+
+    .end_para {
+        color: #24527a;
+        border-right: solid 1px;
+        border-bottom: solid 1px;
+        padding: 3px;
+        }
+</style>
+
+<div>
+    <div>
         <h1>Bienvenue sur BioDiVienne !</h1>
-        <p>Actuellement, il y a {{ especes|length }} espèces enregistrées.</p> Pour les consulter, <a type="buton" href="{{url_for('regne', espece_id=0)}}">cliquez-ici</a>
     </div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="acc_pres">
+        <p><span class="initiale">C</span>ette application est un travail effectué dans le cadre de la validation du Master TNAH de l'Ecole nationale des chartes.
+            Souhaitant mettre à profit mes compétences, j'ai eu la volonté de créer un outil pour les <em style="color: steelblue;">curieux.ses de la biodiversité de
+                la région de la Vienne</em>, mais l'outil fonctionne également pour toutes les autres (#Nossibellesregions!) !<p>
+        <p>Son but est simple : permettre à qui le souhaite de pouvoir recenser les espèces végétales et animales qui l'entourent.</p>
+    </div>
+    <div>
+        <p>{% if especes|length == 0 %}
+            Il n'y a pas encore d'espèces rencensées. Pour en ajouter, créez-vous tout d'abord un compte.
+            {% elif especes|length == 1 %}
+            Il y a pour l'instant une espèce enregistrée : <a type="buton" href="{{url_for('regne', espece_id=0)}}">la consulter</a>.
+            {% else %}
+            Il y a pour l'instant {{ especes|length }} espèces enregistrées : vous pouvez les consulter <a class="end_para" type="buton" href="{{url_for('regne', espece_id=0)}}">ici</a>
+        {% endif %}
+        </p>
+    </div>
+</div>
         {% endblock %}

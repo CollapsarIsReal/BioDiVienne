@@ -1,10 +1,4 @@
 /* style.css */
-body {
-  background-color: #B9D9EB;
-    background-image: url("/static/uploads/martin_pecheur.jpeg");
-    background-position-x: 10ch;
-    background-position-y: 2ch;
-}
 
 h1 {
   color: teal;

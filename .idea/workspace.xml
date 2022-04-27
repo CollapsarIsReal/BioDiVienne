@@ -6,6 +6,7 @@
       <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/conteneur3.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/conteneur3.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pages/accueil6.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/accueil6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/apropos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/apropos.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +48,7 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/master/Documents/Python/cours-python-master(1)/cours-python-master/cours-flask/exemple18"
+    "last_opened_file_path": "/home/master/Documents/Python/cours-python-master(1)/cours-python-master/cours-flask/exemple14"
   }
 }]]></component>
   <component name="RecentsManager">
