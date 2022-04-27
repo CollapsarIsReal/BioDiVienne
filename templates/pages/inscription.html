@@ -3,7 +3,11 @@
 {% block titre %}| Inscription{%endblock%}
 
 {% block corps %}
-
+  <style>
+    body {
+    background-color: #f7d695;
+}
+  </style>
 <h1>Inscription</h1>
 <p>Complétez le formulaire et cliquez sur "S'inscrire".</p>
 <form class="form" method="POST" action="{{url_for("inscription")}}">

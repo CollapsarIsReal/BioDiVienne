@@ -53,12 +53,11 @@ class Espece(db.Model):
     # table qui décrit les espèces
     espece_id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
     espece_fichier = db.Column(db.Text, unique=True, nullable=False)
-    espece_regne = db.Column(db.Text, nullable=False)
-    espece_nom_vernaculaire = db.Column(db.Text)
-    espece_nom_latin = db.Column(db.Text)
+    espece_regne = db.Column(db.Text)
+    espece_nom_vernaculaire = db.Column(db.Text, nullable=False)
+    espece_nom_latin = db.Column(db.Text, unique=True, nullable=False)
     espece_description = db.Column(db.Text)
     espece_preoccupation = db.Column(db.Text)
-    espece_droit_image = db.Column(db.Text)
     authorships = db.relationship("Authorship", back_populates="espece")
 
 class User(UserMixin, db.Model):
@@ -310,12 +309,7 @@ def recherche():
         ).paginate(page=page, per_page=ESPECES_PAR_PAGE)
         titre = "Résultat pour la recherche `" + motclef + "`"
 
-    return render_template(
-        "pages/chercher2.html",
-        resultats=resultats,
-        titre=titre,
-        keyword=motclef
-    )
+    return render_template("pages/chercher2.html", resultats=resultats, titre=titre, keyword=motclef)
 
 
 @app.route("/charger")

@@ -9,6 +9,20 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
+<style>
+
+    body {
+      background-color: #f7d695;
+    }
+
+    h1 {
+      color: teal;
+      margin: 20px;
+    }
+
+
+</style>
 <body>
     {% if action == "suppr" %}
         {% if statut == 0 %}
@@ -23,9 +37,13 @@
         <div class="alert alert-success" role="alert">L'espèce a bien été modifiée.</div>
         {% endif %}
     {% else %}
-    Mes espèces enregistrées :
+    <div class="mes_especes">
+        <div>
+            <h1><span class="initiale">M</span>es espèces enregistrées :</h1>
+            </div>
+        <div>
         {% if especes|length == 0 %}
-        Il n'y a pas d'espèces.
+        Vous n'avez pas encore enregistré d'espèce.
         {% elif especes|length == 1 %}
         <p>Il y a une espèce enregistrée :</p>
         {% else %}
@@ -36,6 +54,8 @@
                             <a type="button" class="btn btn-outline-warning btn-sm" href="{{url_for('espece_modif', espece_id=espece.espece_id)}}">modifier</a>
                             <a type="button" class="btn btn-outline-danger btn-sm" href="{{url_for('espece_supp', espece_id=espece.espece_id)}}">supprimer</a>
                         </li>
-            {% endfor %}
+        {% endfor %}
+            </div>
+    </div>
     {% endif %}
 {% endblock %}

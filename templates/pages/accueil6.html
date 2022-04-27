@@ -2,7 +2,7 @@
 {% block corps %}
 <style>
     body {
-  background-color: #B9D9EB;
+  background-color: #f7d695;
     background-image: url("/static/uploads/martin_pecheur.jpeg");
     background-position-x: 10ch;
     background-position-y: 2ch;
@@ -18,8 +18,9 @@
 
     p {
     text-align: justify;
-    font-size: 19px;
+    font-size: 17px;
     width: 60%;
+    margin-left: 1px;
     }
 
     .initiale {
@@ -37,8 +38,9 @@
         border-bottom: solid 1px;
         padding: 3px;
         }
-</style>
 
+
+</style>
 <div>
     <div>
         <h1>Bienvenue sur BioDiVienne !</h1>
@@ -56,7 +58,7 @@
         <p>{% if especes|length == 0 %}
             Il n'y a pas encore d'espèces rencensées. Pour en ajouter, créez-vous tout d'abord un compte.
             {% elif especes|length == 1 %}
-            Il y a pour l'instant une espèce enregistrée : <a type="buton" href="{{url_for('regne', espece_id=0)}}">la consulter</a>.
+            Il y a pour l'instant une espèce enregistrée : <a class="end_para" type="buton" href="{{url_for('regne', espece_id=0)}}">la consulter</a>.
             {% else %}
             Il y a pour l'instant {{ especes|length }} espèces enregistrées : vous pouvez les consulter <a class="end_para" type="buton" href="{{url_for('regne', espece_id=0)}}">ici</a>
         {% endif %}

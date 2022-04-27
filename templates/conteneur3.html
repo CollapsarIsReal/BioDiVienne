@@ -7,17 +7,18 @@
     {% include "partials/css.html" %}
     {% include "partials/metadata.html" %}
         <link rel="stylesheet" href="/static/css/style.css">
+
 </head>
 <body>
     <!-- section de la navbar -->
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #668ba4;">
-        <a class="navbar-brand" href="{{url_for('accueil')}}"> <img class="d-inline-block" src="{{url_for('static', filename='images/pavot.png')}}" width="60" height="60" class="d-inline-block align-text-top"/>BioDiVienne</a>
+        <a class="navbar-brand" href="{{url_for('accueil')}}" style="color: #f78536; font-size: x-large;"> <img class="d-inline-block" src="{{url_for('static', filename='images/pavot.png')}}" width="60" height="60" class="d-inline-block align-text-top"/>BioDiVienne</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item active"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
-            <a class="nav-link" href="{{url_for('accueil')}}">Accueil</a>
+            <a class="nav-link nav-info" style="color: white" href="{{url_for('accueil')}}">Accueil</a>
           </li>
           <li class="nav-item dropdown nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
-            <a class="nav-link dropdown-toggle" href="#" id="EspecesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" style="color: white" href="#" id="EspecesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Espèces
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -29,51 +30,38 @@
           </li>
             </li>
             <li class="nav-item"> <!-- faire boucle for sur arttibut active pour mettre en gras quand o, est sur la page-->
-            <a class="nav-link" href="{{url_for('page_apropos')}}">À propos</a>
+            <a class="nav-link " style="color: white;" href="{{url_for('page_apropos')}}">À propos</a>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="{{url_for('recherche')}}" method="GET">
-            <a class="nav-link" src="{{url_for('recherche')}}" href="{{url_for('recherche')}}">Rechercher</a> <!--différence src et href-->
+            <a class="nav-link" style="color: white" src="{{url_for('recherche')}}" href="{{url_for('recherche')}}">Rechercher</a> <!--différence src et href-->
 
         </form>
         <ul class="navbar-nav mr-auto">
-            <ul class="navbar-nav mr-auto">
                 {% if not current_user.is_authenticated %}
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url_for("inscription")}}">Inscription</a>
+                    <a class="nav-link" style="color: white" href="{{url_for("inscription")}}">Inscription</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url_for("connexion")}}">Connexion</a>
+                    <a class="nav-link" style="color: white" href="{{url_for("connexion")}}">Connexion</a>
                   </li>
                 {% else %}
                 <li class="nav-item">
-                <a class="nav-link" href="{{url_for("mon_compte")}}">Mon Compte</a>
+                <a class="nav-link" style="color: white" href="{{url_for("mon_compte")}}">Mon Compte</a>
                 </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url_for("deconnexion")}}">Déconnexion ({{current_user.user_nom}})</a>
+                    <a class="nav-link" style="color: white" href="{{url_for("deconnexion")}}">Déconnexion ({{current_user.user_nom}})</a>
                   </li>
                 {% endif %}
-            </ul>
+        </ul>
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" style="color: lightgray">&copy; 2022 E. Falcoz</li>
+        </ul>
     </nav>
     <!-- contenu -->
     <div class="container">
     {% block corps %}{% endblock %}
     </div>
-    <!-- pied de page -->
-<div class="container">
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-    <p class="col-md-4 mb-0 text-muted">&copy; 2022 E.Falcoz</p>
-
-    <a name="favicon" href="static/images/pavot.png" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
-      <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-    </a>
-
-    <ul class="nav col-md-4 justify-content-end">
-      <li class="nav-item"><a href="{{url_for('accueil')}}" class="nav-link px-2 text-muted">Accueil</a></li>
-      <li class="nav-item"><a href="{{url_for('page_apropos')}}" class="nav-link px-2 text-muted">A propos</a></li>
-
-    </ul>
-  </footer>
 </div>
 </body>
 </html>

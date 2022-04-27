@@ -3,10 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="5af2ecb5-3b0b-44de-9475-79bc89a3b0b9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioDivVie2.db" beforeDir="false" afterPath="$PROJECT_DIR$/BioDivVie2.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app25OK.py" beforeDir="false" afterPath="$PROJECT_DIR$/app25OK.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/conteneur3.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/conteneur3.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pages/accueil6.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/accueil6.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pages/apropos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/apropos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/chercher2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/chercher2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/connexion.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/connexion.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/espece.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/espece.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/inscription.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/inscription.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/pages/moncompte.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/moncompte.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/partials/recherche.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/recherche.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/regne2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/regne2.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +57,7 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/master/Documents/Python/cours-python-master(1)/cours-python-master/cours-flask/exemple14"
+    "last_opened_file_path": "/home/master/Documents/Python/BioDiVienne"
   }
 }]]></component>
   <component name="RecentsManager">

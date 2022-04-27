@@ -3,6 +3,16 @@
 {% block titre %}| Connexion{%endblock%}
 
 {% block corps %}
+  <style>
+      body {
+      background-color: #f7d695;
+  }
+
+  h1 {
+      color: teal;
+      margin: 20px;
+    }
+    </style>
 
 <h1>Connexion</h1>
 <form class="form" method="POST" action="{{url_for("connexion")}}">

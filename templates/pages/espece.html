@@ -6,6 +6,11 @@
 {% block corps %}
     {% if espece %}
 <div>
+    <style>
+        body {
+    background-color: #f7d695;
+}
+    </style>
 <div class="row align-items-start">
     <div class="col">
             <img src=/display/{{espece.espece_fichier}} class="img-thumbnail img-responsive" href="{{espece.espece_droit_image}}"> <!--faire fonctionner le lien image-->

@@ -15,10 +15,17 @@ background-color: #fde994;
     }
 
     .presentation {
-    background-color: #e3f6f5;
-    border: thick double #38598b;
-    padding : 10px;
-    margin : 10px;
+     background-color: #e3f6f5;
+      border: thick double #38598b;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    h2 {color: teal;
+    margin-left: 20px;
+    margin: 20px;
+    border-left: solid;
+    padding: 5px;
     }
 </style>
 
@@ -26,7 +33,7 @@ background-color: #fde994;
 <br/>
 <br/>
 <div class="presentation">
-<h2>A la découverte du pourtour Confolentais</h2>
+    <h2>A la découverte du pourtour Confolentais</h2>
     <figure>
         <img src="{{url_for('static', filename='images/carte.png')}}" class="img-fluid" alt="..."/>
         <figcaption class="font-italic">Capture d'écran du site <a href="https://www.inaturalist.org/">INaturalist</a></figcaption>
