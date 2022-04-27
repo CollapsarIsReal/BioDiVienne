@@ -5,17 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BioDivVie2.db" beforeDir="false" afterPath="$PROJECT_DIR$/BioDivVie2.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app25OK.py" beforeDir="false" afterPath="$PROJECT_DIR$/app25OK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/conteneur3.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/conteneur3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/accueil6.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/accueil6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/charger19.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/charger19.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pages/apropos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/apropos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/chercher2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/chercher2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/connexion.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/connexion.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/pages/espece.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/espece.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/inscription.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/inscription.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/pages/moncompte.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/moncompte.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/recherche.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/recherche.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/regne2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/regne2.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,14 +44,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/master/Documents/Python/BioDiVienne"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/master/Documents/Python/BioDiVienne&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/templates" />

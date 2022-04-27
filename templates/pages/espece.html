@@ -10,22 +10,52 @@
         body {
     background-color: #f7d695;
 }
+    img {
+border-style: double;
+border-width: thick;
+border-color: steelblue;
+margin-top: 30px;
+}
+
+.desc {
+margin-top: 30px;
+}
+
+.preocc {
+font-weight: bolder;
+color: white;
+border-style: ridge !important;
+border-radius: 05%;
+padding: 3px;
+background-color: #bc2525;
+border-width: 3px;
+}
+
+p {
+text-align: justify;
+}
+
+h4 {
+margin-left: 30px;
+}
     </style>
+
 <div class="row align-items-start">
     <div class="col">
-            <img src=/display/{{espece.espece_fichier}} class="img-thumbnail img-responsive" href="{{espece.espece_droit_image}}"> <!--faire fonctionner le lien image-->
+            <img src=/display/{{espece.espece_fichier}} class="img-fluid" href="{{espece.espece_droit_image}}"> <!--faire fonctionner le lien image-->
     </div>
-    <div class="col">
+    <div class="col desc">
       <h1>{{espece.espece_nom_vernaculaire}}</h1>
             <h4><i>{{espece.espece_nom_latin}}</i></h4>
       <div class="mb-3">
-                <label class="form-label">{{espece.espece_description}}</label>
+                <p>{{espece.espece_description}}</p>
               </div>
             <div class="mb-3">
-                <label class="form-label">Indice de préoccupation de la Liste rouge nationale (LRN) : {{espece.espece_preoccupation}}</label></br>
+                <p>Indice de préoccupation de la Liste rouge nationale (LRN) : <span class="preocc">{{espece.espece_preoccupation}}</span></p></br>
             </div>
 </div>
 </div>
+
     {% else %}
             <div class="row align-items-start">
                 <div class="col">

@@ -2,8 +2,22 @@
 <html>
 {% extends "conteneur3.html" %}
 {% block corps %}
+ <style>
+        body {
+    background-color: #f7d695;
+		}
 
-<title>Python Flask Image Upload and Display Example</title>
+		img {
+		border-style: double;
+		border-width: thick;
+		border-color: steelblue;
+		}
+
+		h2 {
+		margin-top: 25px;
+		margin-bottom: revert;
+		}
+    </style>
 <div class="container">
 {% if not current_user.is_authenticated %}
 	<div class="alert alert-info" role="alert">Vous devez <a href="{{url_for('connexion')}}">vous connecter</a> pour enregistrer une espèce</div>
@@ -12,6 +26,7 @@
 	{% if filename %}
 	<div class="row align-items-start">
 		<div class="col">
+			<p style="color:green; margin-top: 10px;">L'image a été correctement chargée</p>
 			<img src="{{url_for('display_image', filename=filename) }}" class="img-fluid">
 		</div>
 		<div class="col">
@@ -30,16 +45,14 @@
                 <input type="text" class="form-control" id="description" name="description">
               </div>
 			<div class="mb-3">
-                <label class="form-label">Droit à l'image</label>
-                <input type="text" class="form-control" id="droit_image" name="droit_image">
-              </div>
 			<label for="regne">Règne</label>
-      <select name="regne" id="regne">
+      <select name="regne" id="regne" style="margin-left: 75px;">
         <option value="animal">Animal</option>
         <option value="vegetal">Vegetal</option>
-      </select></br>
+      </select>
+			</div>
 			<label for="preoc">Preoccupation</label>
-      <select name="preoccupation" id="preoc">
+      <select name="preoccupation" id="preoc" style="margin-left: 20px;">
 		  <option value="LC">Inconnue</option>
         <option value="LC">LC</option>
 		  <option value="NT">NT</option>
@@ -55,15 +68,12 @@
 </form>
 	</div>
 	</div>
-
-	<p style="color:green;">L'image a été correctement chargée</p>
-
 	{% else %}
 	<!--Premier formulaire : charger le fichier -->
 	<div class="row align-items-start">
     <div class="col">
 		<p>
-		<h2 style="text-align: center;">Selectionner une image</h2></p>
+		<h2 style="text-align: center;">Veuillez selectionner une image</h2></p>
 	</div>
   </div>
   <div class="row align-items-center">
@@ -75,7 +85,7 @@
 		</p>
     </dl>
     <p>
-		<input class="btn btn-outline-primary" type="submit" id="bouton_charger" value="Valider">
+		<input class="btn btn-outline-primary" type="submit" id="bouton_charger" value="Charger">
 	</p>
 </form>
 	{% endif %}

@@ -21,6 +21,25 @@ background-color: #fde994;
       margin-top: 20px;
     }
 
+    .enregistrer {
+     background-color: white;
+      border: thick double #38598b;
+      padding: 10px;
+      margin-top: 20px;
+    }
+
+    .attention {
+    background-color: red;
+    padding: 3px;
+    color: white;
+    }
+
+    .att {
+    border-bottom: solid 1px;
+    margin-left: 3px;
+    border-color: red;
+    }
+
     h2 {color: teal;
     margin-left: 20px;
     margin: 20px;
@@ -33,9 +52,9 @@ background-color: #fde994;
 <br/>
 <br/>
 <div class="presentation">
-    <h2>A la découverte du pourtour Confolentais</h2>
+    <h2>A la découverte de la Vienne</h2>
     <figure>
-        <img src="{{url_for('static', filename='images/carte.png')}}" class="img-fluid" alt="..."/>
+        <img src="{{url_for('static', filename='images/iNat2.png')}}" class="img-fluid" alt="..."/>
         <figcaption class="font-italic">Capture d'écran du site <a href="https://www.inaturalist.org/">INaturalist</a></figcaption>
     </figure>
 <div>
@@ -79,10 +98,20 @@ background-color: #fde994;
 <div class="enregistrer">
     <h2><i>Comment enregistrer une espèce ?</i></h2>
     <p>Pour cela vous devez d'abord vous rendre dans la page d'enregistrement via l'onglet <b>Espèce</b> puis <b>Création d'une espèce</b></p>
+    En premier lieu vous devez <b>charger l'image</b> que vous souhaiter représentative de votre espèce, puis cliquer sur <b>Charger</b>.<br/>
+    <p><span class="attention">ATTENTION</span><span class="att">: vous ne pourrez pas changer cette photo une fois l'espèce enregistrée.</span></p>
+    <p>Vous devez par la suite renseigner différents paramètres :
         <ul>
-            <li>son nom vernaculaire (usuel)</li>
+    <li>son nom vernaculaire <em>(usuel)</em></li>
             <li>sa dénomination scientifique en latin <i>(une seule espèce par nom latin est autorisée)</i></li>
-</ul>
+            <li>une courte présentation</li>
+            <li>le choix de son règne <em>(animal</em> ou <em>végétal)</em></li>
+            <li>si possible le degré de préoccupation de l'espèce qui permettra plus tard de suivre au plus près les espèces menacées.<br/>
+            Cette attribution est consultable sur le site de la <a href="https://uicn.fr/liste-rouge-france/">Liste rouge nationale (LRN)</a>,
+                notamment via les <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:32009L0147#d1e32-12-1">INDEX</a> qui fournissent une
+                    liste des différentes espèces actuellement protégées.</li>
+        </ul>
+    <p>Puis cliquez sur le bouton <b>Enregistrer</b>
     </p>
 </div>
 {% endblock %}

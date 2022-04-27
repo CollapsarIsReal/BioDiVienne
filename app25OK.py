@@ -229,23 +229,25 @@ def espece_supp(espece_id):
 
 @app.route("/modifier/<int:espece_id>")
 def espece_modif(espece_id):
+    """ Route permettant de modifier une espèce
+                :param espece_id: Identifiant numérique de l'espèce
+                """
     unique_espece = Espece.query.get(espece_id)
 
     return render_template('pages/modifier.html', espece=unique_espece)
 
 @app.route("/modifier_post", methods=['POST'])
 def modifier_post():
+    """ Route permettant de modifier l'espèce dans la base de données """
     return_code = 0
 
     if request.method == "POST":
-        """Route permettant de modifier l'espèce dans la base de données"""
         data = request.form  # c'est un tableau associatif (clé-valeur) appelé collection en python, ou dictionnaire de données
         espece_id_data = data["espece_id"]
         vernaculaire_data = data["vernaculaire"]
         latin_data = data["latin"]
         description_data = data["description"]
         preoccupation_data = data["preoccupation"]
-        #droit_image_data = data["droit_image"]
         regne_data = data["regne"]
 
         # vérification de l'id de l'utilisateur avant modification
@@ -350,7 +352,6 @@ def enregistrer_image():
     latin_data = data["latin"]
     description_data = data["description"]
     preoccupation_data = data["preoccupation"]
-    droit_image_data = data["droit_image"]
 
 
     espece = Espece(
@@ -360,7 +361,6 @@ def enregistrer_image():
         espece_description=description_data,
         espece_regne=regne_data,
         espece_preoccupation=preoccupation_data,
-        espece_droit_image=droit_image_data
     )
     # On enregistre en premier dans la table authorship la lien espèce/user
     a_cree = Authorship(user=current_user, espece=espece)
