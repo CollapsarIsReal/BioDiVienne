@@ -9,6 +9,19 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+<style>
+
+    body {
+      background-color: #f7d695;
+    }
+
+    h2 {
+      color: teal;
+      margin: 20px;
+    }
+
+
+</style>
 <body>
 
 	<h2>Page de modifications</h2>
@@ -28,11 +41,11 @@
               </div>
 			<div class="mb-3">
                 <label class="form-label">Nom latin</label>
-                <input type="text" class="form-control" id="latin" name="latin">
+                <input type="text" class="form-control" id="latin" name="latin" value="{{espece.espece_nom_latin}}">
               </div>
 			<div class="mb-3">
                 <label class="form-label">Description</label>
-                <input type="text" class="form-control" id="description" name="description">
+                <input type="text" class="form-control" id="description" name="description" value="{{espece.espece_description}}">
               </div>
 			<div class="mb-3">
                 <label class="form-label">Droit à l'image</label>
