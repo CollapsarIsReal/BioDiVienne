@@ -33,12 +33,12 @@
 			<h2><i>Caractéristiques de l'espèce :</i></h2>
 		<form class="form" method="POST" action="/enregistrer" id="enreg">
 			<div class="mb-3">
-                <label class="form-label">Nom vernaculaire</label>
-                <input type="text" class="form-control" id="vernaculaire" name="vernaculaire">
+                <label class="form-label">Nom vernaculaire*</label>
+                <input type="text" class="form-control" id="vernaculaire" name="vernaculaire" required>
               </div>
 			<div class="mb-3">
-                <label class="form-label">Nom latin</label>
-                <input type="text" class="form-control" id="latin" name="latin">
+                <label class="form-label">Nom latin*</label>
+                <input type="text" class="form-control" id="latin" name="latin" required>
               </div>
 			<div class="mb-3">
                 <label class="form-label">Description</label>
@@ -53,7 +53,7 @@
 			</div>
 			<label for="preoc">Preoccupation</label>
       <select name="preoccupation" id="preoc" style="margin-left: 20px;">
-		  <option value="LC">Inconnue</option>
+		  <option value="Inconnue">Inconnue</option>
         <option value="LC">LC</option>
 		  <option value="NT">NT</option>
 		  <option value="VU">VU</option>

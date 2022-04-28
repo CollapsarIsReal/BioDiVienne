@@ -31,8 +31,16 @@ background-color: #bc2525;
 border-width: 3px;
 }
 
-p {
+p.description {
+border-top: dotted 1px;
+margin: revert;
+padding: 5px;
+border-bottom: dotted 1px;
 text-align: justify;
+}
+
+h1 {
+color: teal;
 }
 
 h4 {
@@ -48,7 +56,7 @@ margin-left: 30px;
       <h1>{{espece.espece_nom_vernaculaire}}</h1>
             <h4><i>{{espece.espece_nom_latin}}</i></h4>
       <div class="mb-3">
-                <p>{{espece.espece_description}}</p>
+                <p class="description">{{espece.espece_description}}</p>
               </div>
             <div class="mb-3">
                 <p>Indice de préoccupation de la Liste rouge nationale (LRN) : <span class="preocc">{{espece.espece_preoccupation}}</span></p></br>
