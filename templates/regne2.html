@@ -11,21 +11,38 @@
         body {
     background-color: #f7d695;
 }
+
+    span {
+    color: seagreen;
+    border-left: solid teal 2px;
+    border-top: solid thin;
+    padding: 3px;
+}
+
+    h4 {
+margin-top: 20px;
+margin-bottom: revert;
+    }
+
+    li {
+    margin: inherit;
+    }
     </style>
+<h4><span>
     {% if especes|length == 0 %}
-<p>
     <div class="alert alert-warning" role="alert">
       Il n'y a pas d'espèces recensée.
-    </div></p>
+    </div>
     {% elif especes|length == 1 %}
-        <p>Il y a une espèce enregistrée :</p>
+        Il y a une espèce enregistrée :
     {% else %}
-        <p>Il y a {{ especes|length }} espèces enregistrées au total :</p>
+        Il y a {{ especes|length }} espèces enregistrées au total :
     {% endif %}
+</span></h4>
     <ul>
         {% for espece in especes %}
-        <p><li><img src=/display/{{espece.espece_fichier}} width="30px" height="auto"> -
-        <a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a></li></p>
+        <li><img src=/display/{{espece.espece_fichier}} width="60px" height="auto"> ~
+        <a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a></li>
             {% endfor %}
 
         </ul>
