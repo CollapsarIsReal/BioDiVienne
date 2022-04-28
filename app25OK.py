@@ -316,7 +316,8 @@ def recherche():
 
 @app.route("/charger")
 def upload_form():
-    """ Route permettant d'enregistrer une espèce
+    """ Première étape pour appeler /upload
+        A FAIRE: paramètres action et statut
         """
     return render_template("charger19.html")
 
@@ -353,7 +354,6 @@ def enregistrer_image():
     description_data = data["description"]
     preoccupation_data = data["preoccupation"]
 
-
     espece = Espece(
         espece_fichier=filename_data,
         espece_nom_vernaculaire=vernaculaire_data,
@@ -368,7 +368,8 @@ def enregistrer_image():
     db.session.add(espece)
     db.session.add(a_cree)
     db.session.commit()
-    return render_template('charger19.html', filename=filename_data)
+    #return render_template('charger19.html', filename=filename_data)
+    return render_template('pages/espece.html', espece=espece)
 
 
 @app.route('/display/<filename>')
@@ -408,12 +409,15 @@ def mon_compte():
     """ Route permettant d'accéder à la liste de toutes les espèces enregistrées
         selon le compte utilisé
         """
+    #unique_espece = Espece.query.get(1)
     especes_user = db.session.query(Espece)\
         .filter(Espece.espece_id == Authorship.authorship_espece_id)\
         .filter(User.user_id == Authorship.authorship_user_id)\
         .filter(User.user_id == current_user.user_id).all()
-    flash(especes_user)
+
     return render_template('pages/moncompte.html', especes=especes_user)
+    #return render_template('pages/accueil6.html')
+
 
 
 if __name__ == "__main__":
