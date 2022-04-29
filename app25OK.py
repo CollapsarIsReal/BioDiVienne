@@ -1,18 +1,17 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import datetime
-# concernant la sauvegarde des images : Crédits Roy's tutorial : https://roytuts.com/upload-and-display-image-using-python-flask/
 import os
 from flask import flash, redirect, url_for
 from werkzeug.utils import secure_filename
 from flask_login import LoginManager, current_user, logout_user, login_user, UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+# concernant la sauvegarde des images : Crédits Roy's tutorial : https://roytuts.com/upload-and-display-image-using-python-flask/
 
 
 UPLOAD_FOLDER = 'static/uploads/'
-
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
-ESPECES_PAR_PAGE = 5
+# ESPECES_PAR_PAGE = 5 : pour une future pagination
 
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -27,12 +26,12 @@ app = Flask(
     #template_folder=templates,
     #static_folder=statics
 )
-#On configure la base données
+# On configure la base données
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///BioDivVie2.db'
 # On initie l'extension
 db = SQLAlchemy(app)
 login = LoginManager(app)
-app.secret_key = "secret key"
+app.secret_key = "pain_de_vie"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
@@ -277,14 +276,14 @@ def accueil(exemple=None):
     """ Route permettant l'affichage d'une page accueil"""
     especes = Espece.query.all()
     #image_1 = Espece.query.get(id)
-    return render_template("pages/accueil6.html", especes=especes)
+    return render_template("pages/accueil.html", especes=especes)
 
 @app.route("/")
 def accueil_(exemple=None):
     """ Route permettant l'affichage d'une page accueil"""
     especes = Espece.query.all()
     #image_1 = Espece.query.get(id)
-    return render_template("pages/accueil6.html", especes=especes)
+    return render_template("pages/accueil.html", especes=especes)
 
 
 @app.route("/recherche")
@@ -321,7 +320,7 @@ def upload_form():
     """ Première étape pour appeler /upload
         A FAIRE: paramètres action et statut
         """
-    return render_template("charger19.html")
+    return render_template("charger.html")
 
 
 @app.route("/upload", methods=['POST'])
@@ -340,7 +339,7 @@ def upload_image():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         flash("L'image a été correctement téléchargée.")
 
-        return render_template('charger19.html', filename=filename)
+        return render_template('charger.html', filename=filename)
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)
@@ -410,7 +409,7 @@ def regne(espece_id):
         especes = Espece.query.filter(Espece.espece_regne.like("vegetal")).all()
     else:
         especes = []
-    return render_template('regne2.html', especes=especes)
+    return render_template('regne.html', especes=especes)
 
 
 @app.route('/apropos')
@@ -430,7 +429,7 @@ def mon_compte():
         .filter(User.user_id == current_user.user_id).all()
 
     return render_template('pages/moncompte.html', especes=especes_user)
-    #return render_template('pages/accueil6.html')
+    #return render_template('pages/accueil.html')
 
 
 
