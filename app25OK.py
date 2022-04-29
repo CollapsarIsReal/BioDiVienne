@@ -250,11 +250,13 @@ def modifier_post():
         preoccupation_data = data["preoccupation"]
         regne_data = data["regne"]
 
-        # vérification de l'id de l'utilisateur avant modification
-        count_id = db.session.query(Authorship).filter(Authorship.authorship_espece_id == espece_id_data).filter(
+        # vérification que l'utilisateur est bien l'auteur de l'espèce avant modification
+        count_authorship = db.session.query(Authorship).filter(Authorship.authorship_espece_id == espece_id_data).filter(
             Authorship.authorship_user_id == current_user.user_id).count()
+        # vérification du nom latin unique ou non avant modification
+        count_latin = db.session.query(Espece).filter(Espece.espece_nom_latin == latin_data).filter(Espece.espece_id != espece_id_data).count()
 
-        if count_id == 1:  # l'utilisateur est autorisé à modifier l'instance
+        if count_authorship == 1 and count_latin == 0: # l'utilisateur est autorisé à modifier l'instance
 
             unique_espece = Espece.query.get(espece_id_data) # récupération de l'instance de l'espèce de la base
 
@@ -267,7 +269,7 @@ def modifier_post():
 
             # Puis modification de l'espèce
                 db.session.commit()
-                return_code = 1
+                return_code = 1  # OK
     return render_template('pages/moncompte.html', action="modif", statut=return_code)
 
 @app.route("/accueil")
@@ -354,6 +356,11 @@ def enregistrer_image():
     description_data = data["description"]
     preoccupation_data = data["preoccupation"]
 
+    # initialisation du code retour: 0 = erreur
+    return_code = 0
+    count_latin = db.session.query(Espece).filter(Espece.espece_nom_latin == latin_data).count()
+
+    # création espèce pour gestion dans le template espece.html
     espece = Espece(
         espece_fichier=filename_data,
         espece_nom_vernaculaire=vernaculaire_data,
@@ -362,14 +369,21 @@ def enregistrer_image():
         espece_regne=regne_data,
         espece_preoccupation=preoccupation_data,
     )
-    # On enregistre en premier dans la table authorship la lien espèce/user
-    a_cree = Authorship(user=current_user, espece=espece)
-    # Puis enregistre l'espèce
-    db.session.add(espece)
-    db.session.add(a_cree)
-    db.session.commit()
-    #return render_template('charger19.html', filename=filename_data)
-    return render_template('pages/espece.html', espece=espece)
+
+    # création autorisée si le nom latin est unique
+    if count_latin == 0: # nom latin unique
+
+
+        # On enregistre en premier dans la table authorship la lien espèce/user
+        a_cree = Authorship(user=current_user, espece=espece)
+
+        # Puis enregistre l'espèce
+        db.session.add(espece)
+        db.session.add(a_cree)
+        db.session.commit()
+        return_code = 1 # OK
+
+    return render_template('pages/espece.html', espece=espece, statut=return_code)
 
 
 @app.route('/display/<filename>')

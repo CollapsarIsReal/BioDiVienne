@@ -4,9 +4,8 @@
     {{name}}
 {% endblock %}
 {% block corps %}
-    {% if espece %}
-<div>
-    <style>
+
+<style>
         body {
     background-color: #f7d695;
 }
@@ -47,7 +46,11 @@ h4 {
 margin-left: 30px;
 }
     </style>
-
+    {% if statut == 0 %}
+        <div class="alert alert-warning" role="alert">Erreur: vous ne pouvez avoir un même nom latin pour deux espèces.</div>
+    {% else %}
+    {% if espece %}
+<div>
 <div class="row align-items-start">
     <div class="col">
             <img src=/display/{{espece.espece_fichier}} class="img-fluid" href="{{espece.espece_droit_image}}"> <!-- A FAIRE : rediriger vers les crédits de l'image -->
@@ -63,7 +66,6 @@ margin-left: 30px;
             </div>
 </div>
 </div>
-
     {% else %}
             <div class="row align-items-start">
                 <div class="col">
@@ -71,6 +73,8 @@ margin-left: 30px;
                     </div>
             </div>
     {% endif %}
+    {% endif %}
+
     <p><a class="float-right" href="{{url_for('accueil')}}">Retour à l'accueil</a></p>
 
 {% endblock %}
