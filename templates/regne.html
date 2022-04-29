@@ -1,4 +1,4 @@
-{% extends "conteneur3.html" %}
+{% extends "conteneur.html" %}
 
 {% block titre %}
     {% for espece in especes %}
@@ -7,25 +7,42 @@
 {% endblock %}
 
 {% block corps %}
+ <style>
+        body {
+    background-color: #f7d695;
+}
+
+    span {
+    color: seagreen;
+    border-left: solid teal 2px;
+    border-top: solid thin;
+    padding: 3px;
+}
+
+    h4 {
+margin-top: 20px;
+margin-bottom: revert;
+    }
+
+    li {
+    margin: inherit;
+    }
+    </style>
+<h4><span>
     {% if especes|length == 0 %}
-<p>
     <div class="alert alert-warning" role="alert">
       Il n'y a pas d'espèces recensée.
-    </div></p>
+    </div>
     {% elif especes|length == 1 %}
-            <p>Il y a une espèce enregistrée :</p>
-            <h1>{{espece.espece_nom_vernaculaire}}</h1>
-            <h2>{{espece.espece_nom_latin}}</h2>
-            <dl>
-                <dt>Préocupation</dt><dd>{{espece.preocupation}}</dd>
-                <dt>Description</dt><dd>{{espece.description}}</dd>
-            </dl>
+        Il y a une espèce enregistrée :
     {% else %}
-        <p>Il y a {{ especes|length }} espèces enregistrées au total :</p>
+        Il y a {{ especes|length }} espèces enregistrées au total :
     {% endif %}
+</span></h4>
     <ul>
         {% for espece in especes %}
-                        <img src=""<li><a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a></li>
+        <li><img src=/display/{{espece.espece_fichier}} width="60px" height="auto"> ~
+        <a href="{{url_for('espece', espece_id=espece.espece_id)}}">{{espece.espece_nom_vernaculaire}}</a></li>
             {% endfor %}
 
         </ul>
