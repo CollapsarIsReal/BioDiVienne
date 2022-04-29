@@ -11,7 +11,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 UPLOAD_FOLDER = 'static/uploads/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
-# ESPECES_PAR_PAGE = 5 : pour une future pagination
+ESPECES_PAR_PAGE = 10
 
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -320,7 +320,7 @@ def upload_form():
     """ Première étape pour appeler /upload
         A FAIRE: paramètres action et statut
         """
-    return render_template("charger.html")
+    return render_template("pages/charger.html")
 
 
 @app.route("/upload", methods=['POST'])
@@ -339,7 +339,7 @@ def upload_image():
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         flash("L'image a été correctement téléchargée.")
 
-        return render_template('charger.html', filename=filename)
+        return render_template('pages/charger.html', filename=filename)
     else:
         flash('Allowed image types are -> png, jpg, jpeg, gif')
         return redirect(request.url)
@@ -409,7 +409,7 @@ def regne(espece_id):
         especes = Espece.query.filter(Espece.espece_regne.like("vegetal")).all()
     else:
         especes = []
-    return render_template('regne.html', especes=especes)
+    return render_template('pages/regne.html', especes=especes)
 
 
 @app.route('/apropos')
