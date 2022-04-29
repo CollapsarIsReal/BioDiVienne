@@ -26,13 +26,13 @@
 <body>
     {% if action == "suppr" %}
         {% if statut == 0 %}
-        <div class="alert alert-warning" role="alert">Erreur suppression. Veuillez réessayer.</div>
+        <div class="alert alert-warning" role="alert">Suppression non autorisée.</div>
         {% else %}
         <div class="alert alert-success" role="alert">L'espèce a bien été supprimée.</div>
         {% endif %}
     {% elif action == "modif" %}
         {% if statut == 0 %}
-        <div class="alert alert-warning" role="alert">Erreur modification. Veuillez réessayer.</div>
+        <div class="alert alert-warning" role="alert">Modification non autorisée.</div>
         {% else %}
         <div class="alert alert-success" role="alert">L'espèce a bien été modifiée.</div>
         {% endif %}
