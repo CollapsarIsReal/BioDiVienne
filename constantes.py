@@ -1,7 +1,7 @@
 from warnings import warn
 
 #Constantes des résultats de recherche
-RESULTATS_PAR_PAGES = 10
+#RESULTATS_PAR_PAGES = 10
 
 
 #Secret Key
