@@ -4,11 +4,13 @@ from flask_login import UserMixin
 from .. app import db, login
 
 class User(UserMixin, db.Model):
+    # table qui recense les utilisateurs (et donc inscrits) de l'application
     user_id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
     user_nom = db.Column(db.Text, nullable=False)
     user_login = db.Column(db.String(45), nullable=False, unique=True)
     user_email = db.Column(db.Text, nullable=False)
     user_password = db.Column(db.String(100), nullable=False)
+    authorships = db.relationship("Authorship", back_populates="user")
 
     @staticmethod
     def identification(login, motdepasse):
@@ -88,5 +90,3 @@ class User(UserMixin, db.Model):
 @login.user_loader
 def trouver_utilisateur_via_id(identifiant):
     return User.query.get(int(identifiant))
-
-
