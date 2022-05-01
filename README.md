@@ -1,2 +1,0 @@
-# BioDiVienne
-Repository en construction
