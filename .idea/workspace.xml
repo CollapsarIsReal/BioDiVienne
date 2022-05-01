@@ -3,21 +3,65 @@
   <component name="ChangeListManager">
     <list default="true" id="5af2ecb5-3b0b-44de-9475-79bc89a3b0b9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BioDivVie2.db" beforeDir="false" afterPath="$PROJECT_DIR$/BioDivVie2.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app25OK.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constantes.py" beforeDir="false" afterPath="$PROJECT_DIR$/constantes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mail.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/charger.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/charger.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/chercher.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/chercher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/enregistrer.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/enregistrer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/form2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/form2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/formOK.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/formOK.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/css.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/css.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/form.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/metadata.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/partials/metadata.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/partialModif2.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/partials/partialModifOK.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/regne.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/pages/regne.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BioDivVie2.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/app.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/constantes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/modeles/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/modeles/donnees.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/modeles/utilisateurs_.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/routes/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/routes/generic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/css/bootstrap.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/css/font-awesome.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/css/font-awesome.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/css/style_.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/fonts/FontAwesome.otf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/fonts/fontawesome-webfont.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/fonts/fontawesome-webfont.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/fonts/fontawesome-webfont.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/fonts/fontawesome-webfont.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/fonts/fontawesome-webfont.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/images/iNat2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/images/pavot.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/js/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/js/popper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/Anas_querquedula_Llobregat_Delta_Barcelona_5.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/Iris_pseudacorus_0001.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/Male_pochard_reflection_in_evening.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/Male_pochard_reflection_in_evening1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/Myosotis.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/Oriolus_oriolus_Ayodar_1.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/Oriolus_oriolus_Ayodar_11.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/Pinson_des_arbres_male_zoom.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/Viola_reichenbachiana_LC0128.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/chene.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/escargot_bois.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/heron.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/jambon.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/martin_pecheur.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/static/uploads/primevere.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/conteneur.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/accueil.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/apropos.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/charger.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/chercher.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/chercher2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/connexion.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/enregistrer.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/espece.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/form2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/formOK.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/inscription.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/modifier.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/moncompte.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/pages/regne.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/partials/css.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/partials/metadata.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gazetteer/templates/partials/recherche.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/path.py" beforeDir="false" afterPath="$PROJECT_DIR$/path.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,8 +71,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -59,20 +103,22 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "/home/master/Documents/Python/cours-python-master(1)/cours-python-master/cours-flask/exemple17"
+    "last_opened_file_path": "/home/master/Documents/Python/cours-python-master(1)/cours-python-master/cours-flask/exemple18"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/gazetteer" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/templates/pages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/biodivienne" />
+      <recent name="$PROJECT_DIR$/gazetteer" />
       <recent name="$PROJECT_DIR$/templates/pages" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/templates/partials" />
-      <recent name="$PROJECT_DIR$/templates" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -96,16 +142,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/app.py</url>
-          <line>406</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

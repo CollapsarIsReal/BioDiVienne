@@ -1,151 +1,11 @@
-from flask import Flask, render_template, request, redirect
-from flask_sqlalchemy import SQLAlchemy
-import datetime
-import os
-from flask import flash, redirect, url_for
-from werkzeug.utils import secure_filename
-from flask_login import LoginManager, current_user, logout_user, login_user, UserMixin
-from werkzeug.security import generate_password_hash, check_password_hash
-# concernant la sauvegarde des images : Crédits Roy's tutorial : https://roytuts.com/upload-and-display-image-using-python-flask/
+from flask import render_template, request, flash, redirect
 
 
-UPLOAD_FOLDER = 'static/uploads/'
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
-ESPECES_PAR_PAGE = 10
-
-def allowed_file(filename):
-	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-chemin_actuel = os.path.dirname(os.path.abspath(__file__))
-templates = os.path.join(chemin_actuel, "templates")
-statics = os.path.join(chemin_actuel, "static")
-
-#INITIALISATION DES VARIABLES
-app = Flask(
-    "BioDiVienne",
-    #template_folder=templates,
-    #static_folder=statics
-)
-# On configure la base données
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///BioDivVie2.db'
-# On initie l'extension
-db = SQLAlchemy(app)
-login = LoginManager(app)
-app.secret_key = "pain_de_vie"
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-
-
-# On crée nos différents modèles
-
-class Authorship(db.Model):
-    # table qui recoupe l'id du user et l'id de l'espèce qu'il a enregistré
-    __tablename__ = "authorship"
-    authorship_id = db.Column(db.Integer, nullable=True, autoincrement=True, primary_key=True)
-    authorship_espece_id = db.Column(db.Integer, db.ForeignKey('espece.espece_id'))
-    authorship_user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
-    authorship_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    user = db.relationship("User", back_populates="authorships")
-    espece = db.relationship("Espece", back_populates="authorships")
-
-class Espece(db.Model):
-    # table qui décrit les espèces
-    espece_id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
-    espece_fichier = db.Column(db.Text, unique=True, nullable=False)
-    espece_regne = db.Column(db.Text)
-    espece_nom_vernaculaire = db.Column(db.Text, nullable=False)
-    espece_nom_latin = db.Column(db.Text, unique=True, nullable=False)
-    espece_description = db.Column(db.Text)
-    espece_preoccupation = db.Column(db.Text)
-    authorships = db.relationship("Authorship", back_populates="espece")
-
-class User(UserMixin, db.Model):
-    # table qui recense les utilisateurs (et donc inscrits) de l'application
-    user_id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, autoincrement=True)
-    user_nom = db.Column(db.Text, nullable=False)
-    user_login = db.Column(db.String(45), nullable=False, unique=True)
-    user_email = db.Column(db.Text, nullable=False)
-    user_password = db.Column(db.String(100), nullable=False)
-    authorships = db.relationship("Authorship", back_populates="user")
-
-    @staticmethod
-    def identification(login, motdepasse):
-        """ Identifie un utilisateur. Si cela fonctionne, renvoie les données de l'utilisateurs.
-
-        :param login: Login de l'utilisateur
-        :param motdepasse: Mot de passe envoyé par l'utilisateur
-        :returns: Si réussite, données de l'utilisateur. Sinon None
-        :rtype: User or None
-        """
-        utilisateur = User.query.filter(User.user_login == login).first()
-        if utilisateur and check_password_hash(utilisateur.user_password, motdepasse):
-            return utilisateur
-        return None
-
-    @staticmethod
-    def creer(login, email, nom, motdepasse):
-        """ Crée un compte utilisateur-rice. Retourne un tuple (booléen, User ou liste).
-        Si il y a une erreur, la fonction renvoie False suivi d'une liste d'erreur
-        Sinon, elle renvoie True suivi de la donnée enregistrée
-
-        :param login: Login de l'utilisateur-rice
-        :param email: Email de l'utilisateur-rice
-        :param nom: Nom de l'utilisateur-rice
-        :param motdepasse: Mot de passe de l'utilisateur-rice (Minimum 6 caractères)
-
-        """
-        erreurs = []
-        if not login:
-            erreurs.append("Le login fourni est vide")
-        if not email:
-            erreurs.append("L'email fourni est vide")
-        if not nom:
-            erreurs.append("Le nom fourni est vide")
-        if not motdepasse or len(motdepasse) < 6:
-            erreurs.append("Le mot de passe fourni est vide ou trop court")
-
-        # On vérifie que personne n'a utilisé cet email ou ce login
-        uniques = User.query.filter(
-            db.or_(User.user_email == email, User.user_login == login)
-        ).count()
-        if uniques > 0:
-            erreurs.append("L'email ou le login sont déjà inscrits dans notre base de données")
-
-        # Si on a au moins une erreur
-        if len(erreurs) > 0:
-            return False, erreurs
-
-        # On crée un utilisateur
-        utilisateur = User(
-            user_nom=nom,
-            user_login=login,
-            user_email=email,
-            user_password=generate_password_hash(motdepasse)
-        )
-
-        try:
-            # On l'ajoute au transport vers la base de données
-            db.session.add(utilisateur)
-            # On envoie le paquet
-            db.session.commit()
-
-            # On renvoie l'utilisateur
-            return True, utilisateur
-        except Exception as erreur:
-            return False, [str(erreur)]
-
-    def get_id(self):
-        """ Retourne l'id de l'objet actuellement utilisé
-
-        :returns: ID de l'utilisateur
-        :rtype: int
-        """
-        return self.user_id
-
-
-@login.user_loader
-def trouver_utilisateur_via_id(identifiant):
-    return User.query.get(int(identifiant))
+from .app import app, login
+from .modeles.donnees import Espece
+from .modeles.utilisateurs import User
+from .constantes import ESPECE_PAR_PAGE
+from flask_login import login_user, current_user, logout_user
 
 @app.route("/register", methods=["GET", "POST"])
 def inscription():
@@ -283,7 +143,7 @@ def accueil_(exemple=None):
     """ Route permettant l'affichage d'une page accueil"""
     especes = Espece.query.all()
     #image_1 = Espece.query.get(id)
-    return render_template("pages/accueil.html", especes=especes)
+    return render_template("/pages/accueil.html", especes=especes)
 
 
 @app.route("/recherche")
@@ -431,9 +291,3 @@ def mon_compte():
     return render_template('pages/moncompte.html', especes=especes_user)
     #return render_template('pages/accueil.html')
 
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
