@@ -11,9 +11,9 @@ BioDiVienne est une application avec base de données relationnelle, comprenant 
 
 ## Travail restant:
 
-* mettre un fichier requirement.txt avec les différents modules appelés
-* erreur pagination des espèces selon les règnes + dans les résultats de recherche
+* faire fonctionner mon fichier requirement.txt avec les différents modules appelés...
 * reprendre la structure HTML des templates
+* revoir la structure des fichiers .py (quelques commentaires inutiles doivent encore se cacher...)
 * afficher un message d'erreur si l'authentification de l'utilisateur échoue
 * résoudre quelques problèmes de css
 * rendre les valeurs des champs de formulaire en italiques
@@ -23,7 +23,7 @@ BioDiVienne est une application avec base de données relationnelle, comprenant 
 * proposer un système de datation pour visualiser les espèces rencontrées en fonction des jours de l'année.
 * permettre une recherche avancée avec différents filtres
 * planter des arbres
-* manger local...mais je m'égarre...
+* manger local...mais je m'égare...
 * divers outils statistiques
 
 ## Installation de l'application (crédit au tuto du projet [OBBC](https://github.com/Chartes-TNAH/projet_OBBC_AppPy) qui explique ça mieux que moi...)
