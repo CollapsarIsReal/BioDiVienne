@@ -1,10 +1,12 @@
 from flask import render_template, request, flash, redirect
 from flask_login import current_user, login_user, logout_user
-
-from ..app import app, login, db
-from ..constantes import ESPECE_PAR_PAGE
+from werkzeug.utils import secure_filename
+import os
+from ..app import app, login, db, allowed_file
+from ..constantes import ESPECES_PAR_PAGE
 from ..modeles.donnees import Espece, Authorship
 from ..modeles.utilisateurs import User
+
 
 @app.route("/register", methods=["GET", "POST"])
 def inscription():
@@ -144,6 +146,40 @@ def accueil_(exemple=None):
     #image_1 = Espece.query.get(id)
     return render_template("/pages/accueil.html", especes=especes)
 
+'''
+@app.route("/recherche")
+def recherche():
+    """ Route permettant la recherche plein-texte
+    """
+    # On préfèrera l'utilisation de .get() ici
+    #   qui nous permet d'éviter un if long (if "clef" in dictionnaire and dictonnaire["clef"])
+    motclef = request.args.get("keyword", None)
+    page = request.args.get("page", 1)
+
+    if isinstance(page, str) and page.isdigit():
+        page = int(page)
+    else:
+        page = 1
+
+    # On crée une liste vide de résultat (qui restera vide par défaut
+    #   si on n'a pas de mot clé)
+    #resultats = []
+    especes = []
+    index_especes = []
+
+    # On fait de même pour le titre de la page
+    titre = "Recherche"
+    if motclef:
+        #especes = Espece.espece_fichier.like("%{}%".format(motclef)).order_by(Espece.espece_nom_vernaculaire.asc()).all()
+        #resultats = Espece.query.filter(
+        #index_especes = Espece.espece_fichier.like("%{}%".format(motclef)).order_by(Espece.espece_nom_vernaculaire.asc()).paginate(page=page, per_page=ESPECES_PAR_PAGE)
+        especes= Espece.query.order_by(Espece.espece_nom_vernaculaire.asc()).filter(Espece.espece_nom_vernaculaire.like("%{}%".format(motclef)).paginate(page=page, per_page=ESPECES_PAR_PAGE)
+        #index_especes= Espece.query.order_by(Espece.espece_nom_vernaculaire.asc()).filter(Espece.espece_nom_vernaculaire.like("%{}%".format(motclef)).all()
+        titre = "Résultat pour la recherche `" + motclef + "`"
+
+    #return render_template("pages/chercher2.html", resultats=resultats, titre=titre, keyword=motclef)
+    return render_template("pages/chercher3.html", especes=especes, index_especes=index_especes, titre=titre, keyword=motclef)
+'''
 
 @app.route("/recherche")
 def recherche():
@@ -167,12 +203,16 @@ def recherche():
     titre = "Recherche"
     if motclef:
         resultats = Espece.query.filter(
-            Espece.espece_fichier.like("%{}%".format(motclef))
+            Espece.espece_nom_vernaculaire.like("%{}%".format(motclef))
         ).paginate(page=page, per_page=ESPECES_PAR_PAGE)
         titre = "Résultat pour la recherche `" + motclef + "`"
 
-    return render_template("pages/chercher2.html", resultats=resultats, titre=titre, keyword=motclef)
-
+    return render_template(
+        "pages/chercher2.html",
+        resultats=resultats,
+        titre=titre,
+        keyword=motclef
+    )
 
 @app.route("/charger")
 def upload_form():
@@ -195,6 +235,9 @@ def upload_image():
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
+        flash(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        flash("os.getcwd()")
+        flash(os.getcwd())
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         flash("L'image a été correctement téléchargée.")
 
