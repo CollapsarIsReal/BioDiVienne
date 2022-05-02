@@ -4,10 +4,9 @@
     <list default="true" id="5af2ecb5-3b0b-44de-9475-79bc89a3b0b9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/biodivienne/BioDiVienne.db" beforeDir="false" afterPath="$PROJECT_DIR$/biodivienne/BioDiVienne.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/biodivienne/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/constantes.py" beforeDir="false" afterPath="$PROJECT_DIR$/biodivienne/constantes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/biodivienne/routes/generic.py" beforeDir="false" afterPath="$PROJECT_DIR$/biodivienne/routes/generic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/templates/pages/chercher2.html" beforeDir="false" afterPath="$PROJECT_DIR$/biodivienne/templates/pages/chercher2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/biodivienne/templates/pages/chercher.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/biodivienne/templates/pages/chercher3.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +94,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="NONE" type="python-line">
           <url>file://$PROJECT_DIR$/biodivienne/routes/generic.py</url>
-          <line>236</line>
+          <line>202</line>
           <log-expression expression="charger.html', filename=filename)&#10;    else:&#10;        flash('Allowed image types are -&gt; png, jpg, jpeg, gif')&#10;        return redirect(request.url)" language="Python" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
