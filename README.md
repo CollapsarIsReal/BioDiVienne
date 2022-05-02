@@ -26,3 +26,17 @@ BioDiVienne est une application avec base de données relationnelle, comprenant 
 * manger local...mais je m'égarre...
 * divers outils statistiques
 
+## Installation de l'application (crédit au tuto du projet [OBBC](https://github.com/Chartes-TNAH/projet_OBBC_AppPy) qui explique ça mieux que moi...)
+
+1. Installer BioDiVienne à partir de la branche master du dépôt BioDiVienne Github :
+`$ git clone https://github.com/CollapsarIsReal/BioDiVienne.git `
+
+2. Installer Python via le [site](https://www.python.org/downloads/). Pour rappel : la plupart des systèmes Linux, intègre déjà Python.
+
+3. Créer un environnement virtuel à l'aide de VirtualEnv. Dans votre terminal, taper la commande : `$ pip install virtualenv` pour installer VirtualEnv puis `$ virtualenv -p python3 env` ou sous windows : `$ virtualenv -p` puis `$ env:python3 env`
+
+4. Activer l'environnement virtuel via `$ source env/bin/activate`. Pour quitter l'environnement taper simplement `$ deactivate`.
+
+5. Dans le terminal, se placer au niveau du fichier `requirements.txt`, puis installer les différents packages nécéssaires avec la commande suivante : `$ pip install -r requirements.txt`.
+
+6. Dans le terminal, rentrer la commande `$ cd BioDiVienne/`, Une fois dans le dossier lancer l'application avec la commande `$ python run.py` ou `$ python3 run.py` via le serveur local et selon votre version de python (`$ python --version ou -V`).
