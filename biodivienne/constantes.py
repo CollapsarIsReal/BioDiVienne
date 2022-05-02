@@ -17,6 +17,7 @@ class _TEST:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOAD_FOLDER = 'biodivienne/static/uploads/'
     ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
 class _PRODUCTION:
     SECRET_KEY = SECRET_KEY
@@ -27,6 +28,7 @@ class _PRODUCTION:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOAD_FOLDER = 'biodivienne/static/uploads/'
     ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
 CONFIG = {
     "test": _TEST,
@@ -35,4 +37,5 @@ CONFIG = {
 
 #gestion des images
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 
