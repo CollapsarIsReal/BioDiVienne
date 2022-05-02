@@ -33,7 +33,7 @@ BioDiVienne est une application avec base de données relationnelle, comprenant 
 
 2. Installer Python via le [site](https://www.python.org/downloads/). Pour rappel : la plupart des systèmes Linux, intègre déjà Python.
 
-EDIT: Pour l'instant, l'application ne fonctionne pas en lançant le fichier **requirements.txt**. En attendant vous devez récupérer le dossier **envBDV** qui se trouve dans le commit intitulé "upload et pagination OK" n°c9f15272ba8e84d42a51c1af34e3113e745295f0 du 2 mai 2022 ([voir ici](https://github.com/CollapsarIsReal/BioDiVienne/tree/c9f15272ba8e84d42a51c1af34e3113e745295f0). Placez ce dossier dans le répertoir BioDiVienne créé à la suite du git clone (voir étape 1). Promis, ce problème sera réglé très bientôt.
+EDIT: Pour l'instant, l'application ne fonctionne pas en lançant le fichier **requirements.txt**. En attendant vous devez récupérer le dossier **envBDV** qui se trouve dans le commit intitulé "upload et pagination OK" n°c9f15272ba8e84d42a51c1af34e3113e745295f0 du 2 mai 2022 ([voir ici](https://github.com/CollapsarIsReal/BioDiVienne/tree/c9f15272ba8e84d42a51c1af34e3113e745295f0)). Placez ce dossier dans le répertoir BioDiVienne créé à la suite du git clone (voir étape 1). Promis, ce problème sera réglé très bientôt.
 
 3. Lancez l'environnement virtuel grâce à la commande `$ source env/bin/activate`.
 
