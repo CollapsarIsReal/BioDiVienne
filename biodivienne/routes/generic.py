@@ -146,40 +146,6 @@ def accueil_(exemple=None):
     #image_1 = Espece.query.get(id)
     return render_template("/pages/accueil.html", especes=especes)
 
-'''
-@app.route("/recherche")
-def recherche():
-    """ Route permettant la recherche plein-texte
-    """
-    # On préfèrera l'utilisation de .get() ici
-    #   qui nous permet d'éviter un if long (if "clef" in dictionnaire and dictonnaire["clef"])
-    motclef = request.args.get("keyword", None)
-    page = request.args.get("page", 1)
-
-    if isinstance(page, str) and page.isdigit():
-        page = int(page)
-    else:
-        page = 1
-
-    # On crée une liste vide de résultat (qui restera vide par défaut
-    #   si on n'a pas de mot clé)
-    #resultats = []
-    especes = []
-    index_especes = []
-
-    # On fait de même pour le titre de la page
-    titre = "Recherche"
-    if motclef:
-        #especes = Espece.espece_fichier.like("%{}%".format(motclef)).order_by(Espece.espece_nom_vernaculaire.asc()).all()
-        #resultats = Espece.query.filter(
-        #index_especes = Espece.espece_fichier.like("%{}%".format(motclef)).order_by(Espece.espece_nom_vernaculaire.asc()).paginate(page=page, per_page=ESPECES_PAR_PAGE)
-        especes= Espece.query.order_by(Espece.espece_nom_vernaculaire.asc()).filter(Espece.espece_nom_vernaculaire.like("%{}%".format(motclef)).paginate(page=page, per_page=ESPECES_PAR_PAGE)
-        #index_especes= Espece.query.order_by(Espece.espece_nom_vernaculaire.asc()).filter(Espece.espece_nom_vernaculaire.like("%{}%".format(motclef)).all()
-        titre = "Résultat pour la recherche `" + motclef + "`"
-
-    #return render_template("pages/chercher2.html", resultats=resultats, titre=titre, keyword=motclef)
-    return render_template("pages/chercher3.html", especes=especes, index_especes=index_especes, titre=titre, keyword=motclef)
-'''
 
 @app.route("/recherche")
 def recherche():
@@ -235,11 +201,7 @@ def upload_image():
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        flash(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        flash("os.getcwd()")
-        flash(os.getcwd())
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        flash("L'image a été correctement téléchargée.")
 
         return render_template('pages/charger.html', filename=filename)
     else:
