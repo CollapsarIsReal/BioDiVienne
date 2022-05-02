@@ -39,6 +39,12 @@ background-color: #fde994;
     border-color: red;
     }
 
+    .LRN {
+    border-style: dotted;
+    border-width: 2px;
+    margin: 10px;
+    }
+
     h2 {color: teal;
     margin-left: 20px;
     margin: 20px;
@@ -73,13 +79,13 @@ background-color: #fde994;
                 <li>au formulaire d'enregistrement d'une espèce (<b>Enregistrer une espèce</b>)</li>
                 <li>consulter les epèces selon leur règne (<b>vegetal</b>, <b>animal</b> ou bien les <b>deux confondus</b>)</li>
             </ul></li>
-        <li>Un onglet <b>Recherche</b> qui permet de chercher un espèce partiulière parmi toutes les entrées des <i>noms vernaculaires</i></li>
+        <li>Un onglet <b>Recherche</b> qui permet de chercher une espèce particulière parmi toutes les entrées des <i>noms vernaculaires</i></li>
         <li>Un onglet <b>Inscription</b> afin de se créer un compte, avec plusieurs champs à remplir:
             <ul>
                 <li>Login <i>(exemple: patate)</i></li>
-                <li>Nom (A ENLEVER)</li>
+                <li>Nom <i>(ex: frite)</i></li>
                 <li>Email <i>(exemple: patate@feculent.eu)</i></li>
-                <li>Password (maximum 12 caractères)</li>
+                <li>Password <i>(maximum 6 caractères)</i></li>
             </ul>
         <li>Un onglet <b>Connexion</b> pour pouvoir se connecter en entrant :</li>
             <ul>
@@ -109,6 +115,7 @@ background-color: #fde994;
             Cette attribution est consultable sur le site de la <a href="https://uicn.fr/liste-rouge-france/">Liste rouge nationale (LRN)</a>,
                 notamment via les <a href="https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:32009L0147#d1e32-12-1">INDEX</a> qui fournissent une
                     liste des différentes espèces actuellement protégées.</li>
+            <img src="{{url_for('static', filename='images/LRN.png')}}" class="img-fluid LRN" alt="..."/>
         </ul>
     <p>Puis cliquez sur le bouton <b>Enregistrer</b>
     </p>

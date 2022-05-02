@@ -1,8 +1,8 @@
-from flask import url_for
 import datetime
 
 from .. app import db
 
+# création de nos tables
 class Authorship(db.Model):
     # table qui recoupe l'id du user et l'id de l'espèce qu'il a enregistré
     __tablename__ = "authorship"
