@@ -13,6 +13,7 @@ BioDiVienne est une application avec base de données relationnelle, comprenant 
 
 ## Travail restant:
 
+* enlever les quelques routes/fichiers restants qui ne servent à rien...
 * reprendre la structure HTML des templates
 * revoir la structure des fichiers .py (quelques commentaires inutiles doivent encore se cacher...)
 * afficher un message d'erreur si l'authentification de l'utilisateur échoue
