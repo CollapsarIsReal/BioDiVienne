@@ -35,9 +35,10 @@ BioDiVienne est une application avec base de données relationnelle, comprenant 
 
 2. Installer Python via le [site](https://www.python.org/downloads/). Pour rappel : la plupart des systèmes Linux, intègre déjà Python.
 
-EDIT: Pour l'instant, l'application ne fonctionne pas en lançant le fichier **requirements.txt**. En attendant vous devez récupérer le dossier **envBDV** qui se trouve dans le commit intitulé "upload et pagination OK" n°c9f15272ba8e84d42a51c1af34e3113e745295f0 du 2 mai 2022 ([voir ici](https://github.com/CollapsarIsReal/BioDiVienne/tree/c9f15272ba8e84d42a51c1af34e3113e745295f0)). Placez ce dossier dans le répertoir BioDiVienne créé à la suite du git clone (voir étape 1). Promis, ce problème sera réglé très bientôt.
+3. Créer un environnement virtuel à l'aide de VirtualEnv. Dans votre terminal, taper la commande : `$ pip install virtualenv` pour installer VirtualEnv puis `$ virtualenv -p python3 env` ou sous windows : `$ virtualenv -p` puis `$ env:python3 env`
 
-3. Lancez l'environnement virtuel grâce à la commande `$ source envBDV/bin/activate`.
+4. Activer l'environnement virtuel via `$ source env/bin/activate`. Pour quitter l'environnement taper simplement `$ deactivate`.
 
-4. Après cela, vous pouvez lancer l'application avec la commande `$ python3 run.py`.
------
+5. Dans le terminal, se placer au niveau du fichier requirements.txt, puis installer les différents packages nécéssaires avec la commande suivante : `$ pip install -r requirements.txt`.
+
+6. Dans le terminal, rentrer la commande `$ cd BioDiVienne/`. Une fois dans le dossier lancer l'application avec la commande `$ python run.py` ou `$ python3 run.py` via le serveur local et selon votre version de python `($ python --version ou -V)`
