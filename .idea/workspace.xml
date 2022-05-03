@@ -3,27 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5af2ecb5-3b0b-44de-9475-79bc89a3b0b9" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/BioDiVienne.db" beforeDir="false" afterPath="$PROJECT_DIR$/biodivienne/BioDiVienne.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/constantes.py" beforeDir="false" afterPath="$PROJECT_DIR$/biodivienne/constantes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/modeles/donnees.py" beforeDir="false" afterPath="$PROJECT_DIR$/biodivienne/modeles/donnees.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/routes/generic.py" beforeDir="false" afterPath="$PROJECT_DIR$/biodivienne/routes/generic.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/images/carte.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/images/iNat.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/Anas_querquedula_Llobregat_Delta_Barcelona_5.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/Iris_pseudacorus_0001.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/Male_pochard_reflection_in_evening.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/Male_pochard_reflection_in_evening1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/Myosotis.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/Oriolus_oriolus_Ayodar_1.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/Pinson_des_arbres_male_zoom.JPG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/Viola_reichenbachiana_LC0128.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/escargot_bois.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/jambon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/martin_pecheur.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/static/uploads/primevere.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/templates/pages/accueil.html" beforeDir="false" afterPath="$PROJECT_DIR$/biodivienne/templates/pages/accueil.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/biodivienne/templates/pages/apropos.html" beforeDir="false" afterPath="$PROJECT_DIR$/biodivienne/templates/pages/apropos.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
