@@ -1,5 +1,7 @@
 # BioDiVienne
 
+![image accueil du site](https://github.com/CollapsarIsReal/BioDiVienne/blob/master/biodivienne/static/images/accueil.png "accueil")
+
 Ce dépot contient le projet final du cours Python dispensé en M2 TNAH de l'Ecole nationale des chartes par Mr Thibault Clérice, doctorant et référent master à l'école.
 BioDiVienne est un projet de recensement des espèces animales et végétales parmis lesquels nous vivons. Idéal pour un usage personnel, à domicile ou au travail (si c'est pas trop bétonné), cette application permet ainsi de pouvoir créer des fiches correspondantes aux différentes espèces rencontrées.
 
